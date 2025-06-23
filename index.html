@@ -1,221 +1,303 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saabsa Solutions | AI, Software & Healthcare Innovation</title>
-  <meta name="description" content="Saabsa Solutions provides AI-powered business software and ClinicFlow – our healthcare automation platform. Explore innovative solutions from a trusted technology partner." />
-  <meta name="keywords" content="Saabsa, Saabsa Solutions, ClinicFlow, healthcare software, AI business solutions, software development, tech consulting" />
-  <meta name="author" content="Saabsa Solutions" />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Saabsa Solutions" />
-  <meta property="og:description" content="Explore Saabsa Solutions – creators of ClinicFlow and AI-powered digital products for healthcare and business." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.saabsa.com" />
-  <meta property="og:image" content="https://www.saabsa.com/images/preview.png" />
-  <link rel="canonical" href="https://www.saabsa.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Saabsa Solutions",
-      "url": "https://www.saabsa.com",
-      "logo": "https://www.saabsa.com/logo.png",
-      "description": "AI-powered technology services and ClinicFlow platform for healthcare automation.",
-      "sameAs": [
-        "https://www.linkedin.com/company/saabsa",
-        "https://twitter.com/saabsa"
-      ]
-    }
-  </script>
-  <style>
-    :root {
-      --primary-color: #00bfa6;
-      --text-color: #ffffff;
-      --background-color: #0f0f0f;
-      --accent-color: #1de9b6;
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      line-height: 1.6;
-    }
-    header {
-      text-align: center;
-      padding: 80px 20px 60px;
-    }
-    .logo img {
-      max-width: 380px;
-      height: auto;
-      filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 35px 0;
-      background-color: #1c1c1c;
-    }
-    nav a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-weight: 300;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: var(--primary-color);
-    }
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h2 {
-      color: var(--accent-color);
-      margin-bottom: 20px;
-      font-size: 28px;
-    }
-    h3 {
-      color: #ffffff;
-      margin-top: 20px;
-      font-size: 22px;
-    }
-    .services ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .services li {
-      margin: 10px 0;
-      padding: 10px;
-      background: #1e1e1e;
-      border-left: 4px solid var(--primary-color);
-    }
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      padding: 15px;
-      margin: 10px 0;
-      background-color: #1c1c1c;
-      color: var(--text-color);
-      border: 1px solid #333;
-      border-radius: 5px;
-    }
-    .contact-form button {
-      background-color: var(--primary-color);
-      color: #000;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 5px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .contact-form button:hover {
-      background-color: #17c6a4;
-    }
-    .cta-button {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 25px;
-      background-color: var(--accent-color);
-      color: #000;
-      border-radius: 5px;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    footer {
-      background-color: #1c1c1c;
-      text-align: center;
-      padding: 30px 20px;
-      font-size: 14px;
-      color: #aaa;
-    }
-    @media (max-width: 600px) {
-      .logo img {
-        max-width: 240px;
-      }
-      nav {
-        flex-direction: column;
-        gap: 15px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saabsa Solutions | AI, Software & Healthcare Innovation</title>
+    <meta name="description" content="Saabsa Solutions provides AI-powered business software and ClinicFlow – our healthcare automation platform. Explore innovative solutions from a trusted technology partner." />
+    <meta name="keywords" content="Saabsa, Saabsa Solutions, ClinicFlow, healthcare software, AI business solutions, software development, tech consulting" />
+    <meta name="author" content="Saabsa Solutions" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Saabsa Solutions" />
+    <meta property="og:description" content="Explore Saabsa Solutions – creators of ClinicFlow and AI-powered digital products for healthcare and business." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.saabsa.com" />
+    <meta property="og:image" content="https://placehold.co/1200x630/0f0f0f/1de9b6?text=Saabsa+Solutions" />
+    <link rel="canonical" href="https://www.saabsa.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Saabsa Solutions",
+            "url": "https://www.saabsa.com",
+            "logo": "https://placehold.co/200x50/0f0f0f/1de9b6?text=Saabsa+Logo",
+            "description": "AI-powered technology services and ClinicFlow platform for healthcare automation.",
+            "sameAs": [
+                "https://www.linkedin.com/company/saabsa",
+                "https://twitter.com/saabsa"
+            ]
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Using a slightly darker background for modern dark theme */
+            background-color: #0d0d0d;
+            color: #e0e0e0; /* Lighter text for dark background */
+        }
+        /* Custom scroll-to-top button styles */
+        #scrollToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed position */
+            bottom: 20px; /* Place at the bottom */
+            right: 20px; /* Place at the right */
+            z-index: 99; /* High z-index to be on top */
+            background-color: #1de9b6; /* Accent color */
+            color: #000; /* Dark text for contrast */
+            border: none;
+            border-radius: 50%; /* Circular button */
+            padding: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #scrollToTopBtn:hover {
+            background-color: #00bfa6; /* Darker accent on hover */
+            transform: scale(1.05);
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <div class="logo">
-      <img src="c3e45c01-8e75-4708-940f-730d4623b1f1.png" alt="Saabsa Solutions Logo">
+<body class="antialiased">
+
+    <!-- Message Box for form validation -->
+    <div id="messageBox" class="fixed inset-x-0 top-0 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-red-600 text-white px-6 py-3 rounded-lg shadow-xl text-center text-lg font-medium">
+            Please fill out all fields.
+        </div>
     </div>
-  </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#products">Products</a>
-    <a href="#team">Team</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <!-- Header Section -->
+    <header class="bg-gray-900 text-white p-4 shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center py-2">
+            <!-- Logo - SVG created for an eye-catching design -->
+            <a href="#" class="flex items-center space-x-2 text-3xl font-extrabold tracking-tight mb-4 sm:mb-0 rounded-md p-2 hover:bg-gray-800 transition duration-300">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM10.5 17.5C10.5 17.7761 10.2761 18 10 18H7C6.72386 18 6.5 17.7761 6.5 17.5V6.5C6.5 6.22386 6.72386 6 7 6H10C10.2761 6 10.5 6.22386 10.5 6.5V17.5ZM17.5 17.5C17.5 17.7761 17.2761 18 17 18H14C13.7239 18 13.5 17.7761 13.5 17.5V6.5C13.5 6.22386 13.7239 6 14 6H17C17.2761 6 17.5 6.22386 17.5 6.5V17.5Z" fill="url(#gradient)" stroke="#1de9b6" stroke-width="0.5"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="2" y1="12" x2="22" y2="12" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#1de9b6"/>
+                            <stop offset="1" stop-color="#00bfa6"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-green-500">Saabsa Solutions</span>
+            </a>
+            <!-- Navigation -->
+            <nav class="flex flex-wrap justify-center gap-x-8 gap-y-2 text-lg">
+                <a href="#about" class="font-medium hover:text-teal-400 transition duration-300 px-3 py-1 rounded-md">About</a>
+                <a href="#services" class="font-medium hover:text-teal-400 transition duration-300 px-3 py-1 rounded-md">Services</a>
+                <a href="#products" class="font-medium hover:text-teal-400 transition duration-300 px-3 py-1 rounded-md">Products</a>
+                <a href="#team" class="font-medium hover:text-teal-400 transition duration-300 px-3 py-1 rounded-md">Team</a>
+                <a href="#contact" class="bg-teal-500 text-gray-900 px-6 py-2 rounded-full font-semibold shadow-md hover:bg-teal-400 transition duration-300 transform hover:scale-105">Contact Us</a>
+            </nav>
+        </div>
+    </header>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>At Saabsa Solutions, we build future-ready technology with a human touch. Our mission is to help organizations solve complex challenges using modern tools, deep expertise, and a commitment to innovation.</p>
-  </section>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-gray-800 to-gray-950 text-white py-24 px-4 text-center rounded-b-3xl shadow-2xl">
+        <div class="container mx-auto max-w-5xl">
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6 animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-green-500">
+                Pioneering AI & Software Innovation
+            </h1>
+            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto opacity-85">
+                Driving the future of business and healthcare through intelligent solutions.
+            </p>
+            <a href="#contact" class="inline-block bg-teal-500 text-gray-900 px-10 py-4 rounded-full text-xl font-bold shadow-lg hover:bg-teal-400 transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer">
+                Get a Free Consultation
+            </a>
+        </div>
+    </section>
 
-  <section id="services" class="services">
-    <h2>Our Services</h2>
-    <ul>
-      <li>Custom Software Development</li>
-      <li>AI-Powered Business Solutions</li>
-      <li>Cloud Infrastructure & DevOps</li>
-      <li>Data Engineering & Analytics</li>
-      <li>Startup & Enterprise Consulting</li>
-    </ul>
-  </section>
+    <!-- About Us Section -->
+    <section id="about" class="py-20 px-4 bg-gray-900 text-gray-200 rounded-lg shadow-lg mx-auto my-16 max-w-7xl">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
+            <div class="md:w-1/2 text-center md:text-left">
+                <h2 class="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">About Saabsa Solutions</h2>
+                <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                    At Saabsa Solutions, we build future-ready technology with a human touch. Our mission is to help organizations solve complex challenges using modern tools, deep expertise, and a commitment to innovation. We specialize in creating bespoke software and AI-driven platforms that streamline operations and foster growth.
+                </p>
+                <a href="#services" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-indigo-700 transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer">
+                    Explore Our Expertise
+                </a>
+            </div>
+            <div class="md:w-1/2 flex justify-center items-center">
+                <!-- Placeholder Image for about us -->
+                <img src="https://placehold.co/500x350/1f2937/d1d5db?text=Innovating+Solutions" alt="Innovating Solutions" class="rounded-xl shadow-2xl object-cover w-full max-w-md">
+            </div>
+        </div>
+    </section>
 
-  <section id="products">
-    <h2>Our Products</h2>
-    <h3>ClinicFlow</h3>
-    <p>ClinicFlow is our flagship SaaS product tailored for healthcare providers. It enables seamless clinic operations with real-time calendar syncing, AI-driven appointment handling, automated reminders, and direct integration with EHR systems like AthenaHealth.</p>
-    <p>Whether you’re running a small private practice or a large multi-specialty center, ClinicFlow improves patient engagement, boosts staff productivity, and simplifies daily workflows.</p>
-    <a class="cta-button" href="#contact">Request a Demo</a>
-  </section>
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-4 bg-gray-800 text-gray-200 rounded-lg shadow-lg mx-auto my-16 max-w-7xl">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-500">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 border-b-4 border-teal-500">
+                    <div class="text-teal-400 mb-4 text-5xl">💻</div> <!-- Icon for Custom Software -->
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Custom Software Development</h3>
+                    <p class="text-gray-300">Building tailor-made applications that fit your unique business needs and scale with your growth.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 border-b-4 border-green-500">
+                    <div class="text-green-400 mb-4 text-5xl">🤖</div> <!-- Icon for AI Solutions -->
+                    <h3 class="text-2xl font-semibold mb-4 text-white">AI-Powered Business Solutions</h3>
+                    <p class="text-gray-300">Leveraging artificial intelligence to automate processes, gain insights, and drive efficiency.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 border-b-4 border-blue-500">
+                    <div class="text-blue-400 mb-4 text-5xl">☁️</div> <!-- Icon for Cloud/DevOps -->
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Cloud Infrastructure & DevOps</h3>
+                    <p class="text-gray-300">Designing, deploying, and managing scalable and secure cloud environments for optimal performance.</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 border-b-4 border-orange-500">
+                    <div class="text-orange-400 mb-4 text-5xl">📊</div> <!-- Icon for Data Engineering -->
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Data Engineering & Analytics</h3>
+                    <p class="text-gray-300">Transforming raw data into actionable insights through robust data pipelines and analytics.</p>
+                </div>
+                <!-- Service 5 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 border-b-4 border-purple-500">
+                    <div class="text-purple-400 mb-4 text-5xl">💡</div> <!-- Icon for Consulting -->
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Startup & Enterprise Consulting</h3>
+                    <p class="text-gray-300">Providing strategic guidance and technical expertise to help businesses thrive in the digital age.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="team">
-    <h2>Our Team</h2>
-    <p>We’re a diverse team of creative technologists, passionate problem-solvers, and strategic thinkers. Together, we combine technical mastery with a strong sense of purpose to drive impactful results.</p>
-  </section>
+    <!-- Products Section -->
+    <section id="products" class="py-20 px-4 bg-gray-900 text-gray-200 rounded-lg shadow-lg mx-auto my-16 max-w-7xl">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-500">Our Products</h2>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <form class="contact-form" action="https://formspree.io/f/movwkjov" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
+            <!-- ClinicFlow Product Card -->
+            <div class="bg-gray-800 p-10 rounded-xl shadow-2xl hover:shadow-3xl transition duration-300 transform hover:-translate-y-2 border-l-8 border-teal-500 max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/3">
+                        <img src="https://placehold.co/250x250/2d3748/a0aec0?text=ClinicFlow" alt="ClinicFlow Logo" class="rounded-lg shadow-lg w-full h-auto object-cover">
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-3xl font-bold mb-4 text-teal-400">ClinicFlow</h3>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                            ClinicFlow is our flagship SaaS product tailored for healthcare providers. It enables seamless clinic operations with real-time calendar syncing, AI-driven appointment handling, automated reminders, and direct integration with EHR systems like AthenaHealth.
+                        </p>
+                        <p class="text-gray-400 text-md italic mb-6">
+                            Whether you’re running a small private practice or a large multi-specialty center, ClinicFlow improves patient engagement, boosts staff productivity, and simplifies daily workflows.
+                        </p>
+                        <a class="inline-block bg-teal-500 text-gray-900 px-8 py-3 rounded-full font-semibold shadow-md hover:bg-teal-400 transform hover:scale-105 transition duration-300" href="#contact">Request a Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    &copy; 2025 Saabsa Solutions. All rights reserved.
-  </footer>
+    <!-- Team Section -->
+    <section id="team" class="py-20 px-4 bg-gray-800 text-gray-200 rounded-lg shadow-lg mx-auto my-16 max-w-7xl">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Our Team</h2>
+            <p class="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
+                We’re a diverse team of creative technologists, passionate problem-solvers, and strategic thinkers. Together, we combine technical mastery with a strong sense of purpose to drive impactful results and build innovative solutions for our clients.
+            </p>
+            <!-- Could add team member cards here if desired -->
+        </div>
+    </section>
 
-  <script>
-    // Simple validation alert
-    document.querySelector('.contact-form').addEventListener('submit', function(e) {
-      const name = this.name.value.trim();
-      const email = this.email.value.trim();
-      const message = this.message.value.trim();
-      if (!name || !email || !message) {
-        e.preventDefault();
-        alert('Please fill out all fields.');
-      }
-    });
-  </script>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-gray-900 text-gray-200 rounded-lg shadow-lg mx-auto my-16 max-w-7xl">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-600">Get In Touch</h2>
+            <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                Have a project in mind or a question for us? We'd love to hear from you. Fill out the form below or reach out via email.
+            </p>
+            <form class="contact-form max-w-xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl" action="https://formspree.io/f/movwkjov" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required class="w-full p-4 mb-4 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 placeholder-gray-400" />
+                <input type="email" name="email" placeholder="Your Email" required class="w-full p-4 mb-4 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 placeholder-gray-400" />
+                <textarea name="message" rows="6" placeholder="Your Message" required class="w-full p-4 mb-6 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 placeholder-gray-400"></textarea>
+                <button type="submit" class="w-full bg-teal-500 text-gray-900 px-8 py-4 rounded-full font-bold shadow-lg hover:bg-teal-400 transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-950 text-gray-400 py-10 px-4 text-center rounded-t-3xl shadow-inner">
+        <div class="container mx-auto">
+            <p class="mb-6 text-lg">&copy; 2025 Saabsa Solutions. All rights reserved.</p>
+            <div class="flex flex-wrap justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-md">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-md">Terms of Service</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-md">Support</a>
+            </div>
+            <div class="flex justify-center mt-6 space-x-6">
+                <!-- Social Media Icons (Font Awesome or Lucide React would be better, but using SVGs for self-containment) -->
+                <a href="https://www.linkedin.com/company/saabsa" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transform hover:scale-110 transition duration-300">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="https://twitter.com/saabsa" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transform hover:scale-110 transition duration-300">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M22.162 5.66c-.687.304-1.424.509-2.203.6A3.992 3.992 0 0021.5 2.5c-2.033.98-4.27 1.69-6.685 2.06a8.04 8.04 0 01-4.73-1.636c-1.348-1.026-2.903-1.63-4.59-1.63-3.483 0-6.31 2.827-6.31 6.31 0 .495.05.975.147 1.432C3.905 10.6 7.42 8.7 11.23 6.6c-.365.195-.73.386-1.1.57a3.007 3.007 0 00-2.88 4.774c.48.24 1.0.384 1.547.417a2.985 2.985 0 01-2.9-3.23c0-.044.004-.088.012-.13A6.32 6.32 0 003.5 17.5c2.146 0 3.93-1.01 5.244-2.58A6.29 6.29 0 0022.162 5.66z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Go to top">⬆️</button>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form validation message display
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            const name = this.name.value.trim();
+            const email = this.email.value.trim();
+            const message = this.message.value.trim();
+            const messageBox = document.getElementById('messageBox');
+
+            if (!name || !email || !message) {
+                e.preventDefault();
+                messageBox.classList.remove('hidden');
+                setTimeout(() => {
+                    messageBox.classList.add('hidden');
+                }, 3000); // Hide after 3 seconds
+            }
+        });
+
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        // When the user clicks on the button, scroll to the top of the document
+        scrollToTopBtn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
 </body>
 </html>
