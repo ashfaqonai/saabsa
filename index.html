@@ -32,12 +32,6 @@
       height: auto;
       filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
     }
-    .tagline {
-      font-size: 18px;
-      color: var(--accent-color);
-      letter-spacing: 2px;
-      margin-top: 12px;
-    }
     nav {
       display: flex;
       justify-content: center;
@@ -63,6 +57,11 @@
       color: var(--accent-color);
       margin-bottom: 20px;
       font-size: 28px;
+    }
+    h3 {
+      color: #ffffff;
+      margin-top: 20px;
+      font-size: 22px;
     }
     .services ul {
       list-style: none;
@@ -96,6 +95,16 @@
     .contact-form button:hover {
       background-color: #17c6a4;
     }
+    .cta-button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 25px;
+      background-color: var(--accent-color);
+      color: #000;
+      border-radius: 5px;
+      font-weight: 600;
+      text-decoration: none;
+    }
     footer {
       background-color: #1c1c1c;
       text-align: center;
@@ -119,12 +128,12 @@
     <div class="logo">
       <img src="c3e45c01-8e75-4708-940f-730d4623b1f1.png" alt="Saabsa Solutions Logo">
     </div>
-    
   </header>
 
   <nav>
     <a href="#about">About</a>
     <a href="#services">Services</a>
+    <a href="#products">Products</a>
     <a href="#team">Team</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -145,6 +154,14 @@
     </ul>
   </section>
 
+  <section id="products">
+    <h2>Our Products</h2>
+    <h3>ClinicFlow</h3>
+    <p>ClinicFlow is our flagship SaaS product tailored for healthcare providers. It enables seamless clinic operations with real-time calendar syncing, AI-driven appointment handling, automated reminders, and direct integration with EHR systems like AthenaHealth.</p>
+    <p>Whether you’re running a small private practice or a large multi-specialty center, ClinicFlow improves patient engagement, boosts staff productivity, and simplifies daily workflows.</p>
+    <a class="cta-button" href="#contact">Request a Demo</a>
+  </section>
+
   <section id="team">
     <h2>Our Team</h2>
     <p>We’re a diverse team of creative technologists, passionate problem-solvers, and strategic thinkers. Together, we combine technical mastery with a strong sense of purpose to drive impactful results.</p>
@@ -152,7 +169,7 @@
 
   <section id="contact">
     <h2>Contact Us</h2>
-    <form class="contact-form">
+    <form class="contact-form" action="https://formspree.io/f/movwkjov" method="POST">
       <input type="text" name="name" placeholder="Your Name" required />
       <input type="email" name="email" placeholder="Your Email" required />
       <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
@@ -163,5 +180,18 @@
   <footer>
     &copy; 2025 Saabsa Solutions. All rights reserved.
   </footer>
+
+  <script>
+    // Simple validation alert
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      const name = this.name.value.trim();
+      const email = this.email.value.trim();
+      const message = this.message.value.trim();
+      if (!name || !email || !message) {
+        e.preventDefault();
+        alert('Please fill out all fields.');
+      }
+    });
+  </script>
 </body>
 </html>
