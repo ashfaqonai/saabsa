@@ -180,7 +180,7 @@
             bottom: 30px;
             right: 30px;
             z-index: 1000;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0F3D6E 0%, #F26A21 100%);
             color: white;
             border: none;
             border-radius: 50%;
@@ -188,13 +188,13 @@
             height: 56px;
             font-size: 24px;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 20px rgba(15, 61, 110, 0.4);
             transition: all 0.3s ease;
         }
         
         #scrollToTopBtn:hover {
             transform: scale(1.1);
-            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 12px 30px rgba(15, 61, 110, 0.6);
         }
         
         .section-padding {
@@ -249,17 +249,46 @@
     <header class="glass-effect sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto px-4 py-4">
             <div class="flex flex-col sm:flex-row justify-between items-center">
-                <a href="#" class="flex items-center space-x-3 mb-4 sm:mb-0 group">
-                    <div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform">
-                        S
-                    </div>
-                    <span class="text-2xl font-bold gradient-text">Saabsa Solutions</span>
+                <a href="#" class="mb-4 sm:mb-0 group transition-transform hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" role="img" aria-labelledby="logo-title logo-desc" class="h-12 w-auto">
+                        <title id="logo-title">Saabsa Solutions logo</title>
+                        <desc id="logo-desc">Hex-tech icon with "SAABSA SOLUTIONS" wordmark</desc>
+                        <!-- Icon -->
+                        <g transform="translate(20,20)">
+                            <defs>
+                                <linearGradient id="split2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="50%" stop-color="#0F3D6E"/>
+                                    <stop offset="50%" stop-color="#F26A21"/>
+                                </linearGradient>
+                                <clipPath id="hexClip2">
+                                    <path d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
+                                </clipPath>
+                            </defs>
+                            <path fill="url(#split2)" d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
+                            <g clip-path="url(#hexClip2)" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
+                                <line x1="30" y1="40" x2="90" y2="40"/>
+                                <circle cx="30" cy="40" r="4" fill="#FFFFFF"/>
+                                <circle cx="90" cy="40" r="4" fill="#FFFFFF"/>
+                                <line x1="30" y1="60" x2="90" y2="60"/>
+                                <circle cx="30" cy="60" r="4" fill="#FFFFFF"/>
+                                <circle cx="90" cy="60" r="4" fill="#FFFFFF"/>
+                                <line x1="30" y1="80" x2="90" y2="80"/>
+                                <circle cx="30" cy="80" r="4" fill="#FFFFFF"/>
+                                <circle cx="90" cy="80" r="4" fill="#FFFFFF"/>
+                            </g>
+                        </g>
+                        <!-- Wordmark -->
+                        <g transform="translate(170,40)">
+                            <text x="0" y="45" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="48" font-weight="700" fill="#0F3D6E" letter-spacing="1">SAABSA</text>
+                            <text x="0" y="90" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="28" font-weight="600" fill="#0F3D6E" opacity="0.85" letter-spacing="2">SOLUTIONS</text>
+                        </g>
+                    </svg>
                 </a>
                 <nav class="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm sm:text-base">
-                    <a href="#about" class="font-medium text-gray-700 hover:text-purple-600 transition-colors">About</a>
-                    <a href="#services" class="font-medium text-gray-700 hover:text-purple-600 transition-colors">Services</a>
-                    <a href="#patientree" class="font-medium text-gray-700 hover:text-purple-600 transition-colors">Patientree AI</a>
-                    <a href="#contact" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
+                    <a href="#about" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">About</a>
+                    <a href="#services" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Services</a>
+                    <a href="#patientree" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Patientree AI</a>
+                    <a href="#contact" class="bg-gradient-to-r from-[#0F3D6E] to-[#F26A21] text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
                         Get Started
                     </a>
                 </nav>
@@ -287,7 +316,7 @@
                     From custom development to Patientree AI, we turn innovation into reality.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="#contact" class="bg-white text-purple-600 px-8 py-4 rounded-full text-lg font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all pulse-animation">
+                    <a href="#contact" class="bg-white text-[#0F3D6E] px-8 py-4 rounded-full text-lg font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all pulse-animation">
                         Start Your Project →
                     </a>
                     <a href="#patientree" class="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full text-lg font-bold border-2 border-white/50 hover:bg-white/30 transition-all">
@@ -388,7 +417,7 @@
             </div>
             
             <div class="text-center">
-                <a href="https://www.patientree.com" target="_blank" rel="noopener noreferrer" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-4 rounded-full text-lg font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all">
+                <a href="https://www.patientree.com" target="_blank" rel="noopener noreferrer" class="inline-block bg-gradient-to-r from-[#0F3D6E] to-[#F26A21] text-white px-10 py-4 rounded-full text-lg font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all">
                     Visit Patientree AI Website →
                 </a>
             </div>
@@ -589,7 +618,7 @@
                             <div class="text-sm text-gray-600">Happy Clients</div>
                         </div>
                     </div>
-                    <a href="#contact" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all">
+                    <a href="#contact" class="inline-block bg-gradient-to-r from-[#0F3D6E] to-[#F26A21] text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all">
                         Work With Us →
                     </a>
                 </div>
@@ -649,7 +678,7 @@
                 </div>
                 <button 
                     type="submit" 
-                    class="w-full bg-white text-purple-600 px-8 py-4 rounded-xl text-lg font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all"
+                    class="w-full bg-white text-[#0F3D6E] px-8 py-4 rounded-xl text-lg font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all"
                 >
                     Send Message →
                 </button>
@@ -666,9 +695,31 @@
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center text-white font-bold">
-                            S
-                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="footer-title footer-desc" class="w-10 h-10">
+                            <title id="footer-title">Saabsa Solutions hex-tech icon</title>
+                            <desc id="footer-desc">A split blue-orange hexagon with white circuit lines and nodes</desc>
+                            <defs>
+                                <linearGradient id="split" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="50%" stop-color="#0F3D6E"/>
+                                    <stop offset="50%" stop-color="#F26A21"/>
+                                </linearGradient>
+                                <clipPath id="hexClip">
+                                    <path d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
+                                </clipPath>
+                            </defs>
+                            <path fill="url(#split)" d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
+                            <g clip-path="url(#hexClip)" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
+                                <line x1="30" y1="40" x2="90" y2="40"/>
+                                <circle cx="30" cy="40" r="4" fill="#FFFFFF"/>
+                                <circle cx="90" cy="40" r="4" fill="#FFFFFF"/>
+                                <line x1="30" y1="60" x2="90" y2="60"/>
+                                <circle cx="30" cy="60" r="4" fill="#FFFFFF"/>
+                                <circle cx="90" cy="60" r="4" fill="#FFFFFF"/>
+                                <line x1="30" y1="80" x2="90" y2="80"/>
+                                <circle cx="30" cy="80" r="4" fill="#FFFFFF"/>
+                                <circle cx="90" cy="80" r="4" fill="#FFFFFF"/>
+                            </g>
+                        </svg>
                         <span class="text-xl font-bold text-white">Saabsa Solutions</span>
                     </div>
                     <p class="text-sm text-gray-400 leading-relaxed">
@@ -694,7 +745,7 @@
                 <div>
                     <h3 class="text-white font-bold mb-4">Connect</h3>
                     <div class="flex space-x-4">
-                        <a href="https://www.linkedin.com/company/saabsa-solutions" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-purple-600 transition-colors">
+                        <a href="https://www.linkedin.com/company/saabsa-solutions" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-[#0F3D6E] transition-colors">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
