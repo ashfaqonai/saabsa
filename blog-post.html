@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PXBREVK1K"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1PXBREVK1K');
+    </script>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO will be dynamically updated -->
+    <title>Blog Post | Saabsa Solutions</title>
+    <meta name="description" content="Read the latest insights from Saabsa Solutions" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            color: #1a202c;
+            overflow-x: hidden;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .section-padding {
+            padding: 80px 20px;
+        }
+        
+        .blog-content {
+            line-height: 1.8;
+        }
+        
+        .blog-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+        
+        .blog-content h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+        
+        .blog-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #1a202c;
+        }
+        
+        .blog-content p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+            font-size: 1.125rem;
+        }
+        
+        .blog-content ul, .blog-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-content li {
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+            font-size: 1.125rem;
+        }
+        
+        .blog-content a {
+            color: #667eea;
+            text-decoration: underline;
+        }
+        
+        .blog-content code {
+            background: #f7fafc;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+        
+        .blog-content pre {
+            background: #f7fafc;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-content blockquote {
+            border-left: 4px solid #667eea;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #4a5568;
+            font-style: italic;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <!-- Header -->
+    <header class="glass-effect sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex flex-col sm:flex-row justify-between items-center">
+                <a href="index.html" class="mb-4 sm:mb-0 group transition-transform hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" role="img" class="h-12 w-auto">
+                        <g transform="translate(20,20)">
+                            <defs>
+                                <linearGradient id="split2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="50%" stop-color="#0F3D6E"/>
+                                    <stop offset="50%" stop-color="#F26A21"/>
+                                </linearGradient>
+                                <clipPath id="hexClip2">
+                                    <path d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
+                                </clipPath>
+                            </defs>
+                            <path fill="url(#split2)" d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
+                            <g clip-path="url(#hexClip2)" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
+                                <line x1="30" y1="40" x2="90" y2="40"/>
+                                <circle cx="30" cy="40" r="4" fill="#FFFFFF"/>
+                                <circle cx="90" cy="40" r="4" fill="#FFFFFF"/>
+                                <line x1="30" y1="60" x2="90" y2="60"/>
+                                <circle cx="30" cy="60" r="4" fill="#FFFFFF"/>
+                                <circle cx="90" cy="60" r="4" fill="#FFFFFF"/>
+                                <line x1="30" y1="80" x2="90" y2="80"/>
+                                <circle cx="30" cy="80" r="4" fill="#FFFFFF"/>
+                                <circle cx="90" cy="80" r="4" fill="#FFFFFF"/>
+                            </g>
+                        </g>
+                        <g transform="translate(170,40)">
+                            <text x="0" y="45" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="48" font-weight="700" fill="#0F3D6E" letter-spacing="1">SAABSA</text>
+                            <text x="0" y="90" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="28" font-weight="600" fill="#0F3D6E" opacity="0.85" letter-spacing="2">SOLUTIONS</text>
+                        </g>
+                    </svg>
+                </a>
+                <nav class="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm sm:text-base">
+                    <a href="index.html#about" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">About</a>
+                    <a href="services.html" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Services</a>
+                    <a href="blog.html" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Blog</a>
+                    <a href="index.html#patientree" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Patientree AI</a>
+                    <a href="index.html#contact" class="bg-gradient-to-r from-[#0F3D6E] to-[#F26A21] text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
+                        Get Started
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Blog Post Content -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <div class="mb-6">
+                <a href="blog.html" class="text-[#0F3D6E] font-semibold hover:underline inline-flex items-center gap-2">
+                    ← Back to Blog
+                </a>
+            </div>
+            <div id="blogPostContent" class="glass-effect p-8 md:p-12 rounded-3xl shadow-xl">
+                <div class="text-center">
+                    <p class="text-gray-600">Loading blog post...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto max-w-7xl px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="text-xl font-bold text-white">Saabsa Solutions</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        <strong>Saabsa Solutions</strong> is an emerging tech company focused on AI and software for healthcare.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="blog.html" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="index.html#patientree" class="hover:text-white transition-colors">Patientree AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/company/saabsa-solutions" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-[#0F3D6E] transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Saabsa Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get slug from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+
+        if (!slug) {
+            document.getElementById('blogPostContent').innerHTML = `
+                <div class="text-center">
+                    <h1 class="text-3xl font-bold mb-4 text-gray-900">Post Not Found</h1>
+                    <p class="text-gray-600 mb-6">The blog post you're looking for doesn't exist.</p>
+                    <a href="blog.html" class="text-[#0F3D6E] font-semibold hover:underline">← Back to Blog</a>
+                </div>
+            `;
+        } else {
+            loadBlogPost(slug);
+        }
+
+        async function loadBlogPost(slug) {
+            try {
+                // First, get post metadata
+                const postsResponse = await fetch('_posts/posts.json');
+                const postsData = await postsResponse.json();
+                const post = postsData.posts.find(p => p.slug === slug);
+
+                if (!post) {
+                    throw new Error('Post not found');
+                }
+
+                // Load the markdown content
+                const markdownResponse = await fetch(`_posts/${post.date}-${slug}.md`);
+                if (!markdownResponse.ok) {
+                    throw new Error('Post content not found');
+                }
+                const markdown = await markdownResponse.text();
+
+                // Parse front matter and content
+                const frontMatterMatch = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+                let content = markdown;
+                if (frontMatterMatch) {
+                    content = frontMatterMatch[2];
+                }
+
+                // Update page title and meta
+                document.title = `${post.title} | Saabsa Solutions Blog`;
+                const metaDescription = document.querySelector('meta[name="description"]');
+                if (metaDescription) {
+                    metaDescription.content = post.excerpt || post.title;
+                }
+
+                // Format date
+                const formattedDate = new Date(post.date).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+
+                // Render content
+                const html = `
+                    <article>
+                        <div class="flex items-center gap-4 mb-6 text-sm text-gray-500">
+                            <time datetime="${post.date}">${formattedDate}</time>
+                            ${post.category ? `<span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">${post.category}</span>` : ''}
+                        </div>
+                        <h1 class="text-4xl md:text-5xl font-black mb-8 text-gray-900">${post.title}</h1>
+                        <div class="blog-content">
+                            ${marked.parse(content)}
+                        </div>
+                    </article>
+                `;
+
+                document.getElementById('blogPostContent').innerHTML = html;
+            } catch (error) {
+                console.error('Error loading blog post:', error);
+                document.getElementById('blogPostContent').innerHTML = `
+                    <div class="text-center">
+                        <h1 class="text-3xl font-bold mb-4 text-gray-900">Post Not Found</h1>
+                        <p class="text-gray-600 mb-6">The blog post you're looking for doesn't exist or couldn't be loaded.</p>
+                        <a href="blog.html" class="text-[#0F3D6E] font-semibold hover:underline">← Back to Blog</a>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
+

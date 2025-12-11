@@ -1,0 +1,12 @@
+{
+  "posts": [
+    {
+      "title": "Welcome to the Saabsa Solutions Blog",
+      "date": "2025-01-15",
+      "category": "Company News",
+      "excerpt": "Welcome to our new blog! We'll be sharing insights on healthcare technology, AI software development, and healthcare automation.",
+      "slug": "welcome-to-saabsa-solutions-blog"
+    }
+  ]
+}
+
