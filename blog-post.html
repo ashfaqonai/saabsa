@@ -13,10 +13,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" href="patientreeLogo.png" />
+    <link rel="apple-touch-icon" href="patientreeLogo.png" />
+    
     <!-- SEO will be dynamically updated -->
     <title>Blog Post | Saabsa Solutions</title>
     <meta name="description" content="Read the latest insights from Saabsa Solutions" />
     <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.saabsa.com/blog-post.html" />
+    <meta property="og:title" content="Blog Post | Saabsa Solutions" />
+    <meta property="og:description" content="Read the latest insights from Saabsa Solutions" />
+    <meta property="og:image" content="https://www.saabsa.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Blog Post | Saabsa Solutions" />
+    <meta property="og:site_name" content="Saabsa Solutions" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.saabsa.com/blog-post.html" />
+    <meta name="twitter:title" content="Blog Post | Saabsa Solutions" />
+    <meta name="twitter:description" content="Read the latest insights from Saabsa Solutions" />
+    <meta name="twitter:image" content="https://www.saabsa.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Blog Post | Saabsa Solutions" />
+    
+    <link rel="canonical" href="https://www.saabsa.com/blog-post.html" />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -287,6 +314,43 @@
                 if (metaDescription) {
                     metaDescription.content = post.excerpt || post.title;
                 }
+
+                // Update Open Graph meta tags
+                const updateMetaTag = (property, content) => {
+                    let meta = document.querySelector(`meta[property="${property}"]`) || document.querySelector(`meta[name="${property}"]`);
+                    if (!meta) {
+                        meta = document.createElement('meta');
+                        if (property.startsWith('og:')) {
+                            meta.setAttribute('property', property);
+                        } else {
+                            meta.setAttribute('name', property);
+                        }
+                        document.head.appendChild(meta);
+                    }
+                    meta.setAttribute('content', content);
+                };
+
+                const postUrl = `https://www.saabsa.com/blog-post.html?slug=${slug}`;
+                const postImage = post.image || 'https://www.saabsa.com/og-image.png';
+                const postExcerpt = post.excerpt || post.title;
+
+                updateMetaTag('og:url', postUrl);
+                updateMetaTag('og:title', post.title);
+                updateMetaTag('og:description', postExcerpt);
+                updateMetaTag('og:image', postImage);
+                updateMetaTag('twitter:url', postUrl);
+                updateMetaTag('twitter:title', post.title);
+                updateMetaTag('twitter:description', postExcerpt);
+                updateMetaTag('twitter:image', postImage);
+
+                // Update canonical URL
+                let canonical = document.querySelector('link[rel="canonical"]');
+                if (!canonical) {
+                    canonical = document.createElement('link');
+                    canonical.setAttribute('rel', 'canonical');
+                    document.head.appendChild(canonical);
+                }
+                canonical.setAttribute('href', postUrl);
 
                 // Format date
                 const formattedDate = new Date(post.date).toLocaleDateString('en-US', { 
