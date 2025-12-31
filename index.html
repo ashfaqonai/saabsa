@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PXBREVK1K"></script>
+    <!-- Google tag (gtag.js) - Deferred for performance -->
     <script>
+        // Defer Google Analytics initialization
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-1PXBREVK1K');
+        // Load GA script after page load
+        window.addEventListener('load', function() {
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-1PXBREVK1K';
+            document.head.appendChild(script);
+            script.onload = function() {
+                gtag('js', new Date());
+                gtag('config', 'G-1PXBREVK1K');
+            };
+        });
     </script>
     
     <meta charset="UTF-8" />
@@ -19,7 +28,7 @@
     <link rel="apple-touch-icon" href="patientreeLogo.png" />
     
     <!-- Enhanced SEO Meta Tags -->
-    <title>Saabsa Solutions - AI Software Development & Healthcare Technology Company</title>
+    <title>Saabsa Solutions - AI Healthcare Software Development</title>
     <meta name="description" content="Saabsa Solutions is an emerging tech company focused on AI and software for healthcare. We build custom software, AI-powered solutions, EHR systems, telehealth platforms, and Patientree AI - a revolutionary healthcare automation platform for scheduling, billing, and patient engagement." />
     <meta name="keywords" content="Saabsa Solutions, AI software development, healthcare automation, Patientree AI, custom software development, AI solutions, healthcare technology, SaaS development, EHR systems, telehealth platforms, healthcare IT, ClinicFlow, health tech, AI for healthcare, software consulting" />
     <meta name="author" content="Saabsa Solutions" />
@@ -34,7 +43,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.saabsa.com" />
-    <meta property="og:title" content="Saabsa Solutions - AI Software Development & Healthcare Technology" />
+    <meta property="og:title" content="Saabsa Solutions - AI Healthcare Software Development" />
     <meta property="og:description" content="Saabsa Solutions: Emerging tech company focused on AI and software for healthcare. Custom software development, Patientree AI platform, EHR systems, and telehealth solutions." />
     <meta property="og:image" content="https://www.saabsa.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -46,7 +55,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://www.saabsa.com" />
-    <meta name="twitter:title" content="Saabsa Solutions - AI Software Development & Healthcare Technology" />
+    <meta name="twitter:title" content="Saabsa Solutions - AI Healthcare Software Development" />
     <meta name="twitter:description" content="Saabsa Solutions: Emerging tech company focused on AI and software for healthcare. Custom software development, Patientree AI platform, EHR systems, and telehealth solutions." />
     <meta name="twitter:image" content="https://www.saabsa.com/og-image.png" />
     <meta name="twitter:image:alt" content="Saabsa Solutions - AI Software Development & Healthcare Technology" />
@@ -54,152 +63,29 @@
     
     <link rel="canonical" href="https://www.saabsa.com" />
     
-    <!-- Fonts -->
+    <!-- Resource Hints for Performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts - Optimized with font-display: swap and reduced weights, loaded asynchronously -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"></noscript>
     
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Saabsa Solutions",
-        "alternateName": "Saabsa",
-        "url": "https://www.saabsa.com",
-        "logo": "https://www.saabsa.com/logo.png",
-        "description": "Saabsa Solutions is an emerging tech company focused on AI and software for healthcare. We build custom software, AI-powered solutions, EHR systems, telehealth platforms, and Patientree AI - a revolutionary healthcare automation platform.",
-        "foundingDate": "2020",
-        "foundingLocation": {
-            "@type": "Place",
-            "addressCountry": "US"
-        },
-        "sameAs": [
-            "https://www.linkedin.com/company/saabsa-solutions",
-            "https://x.com/SaabsaSolutions"
-        ],
-        "contactPoint": [
-            {
-                "@type": "ContactPoint",
-                "contactType": "Sales",
-                "email": "contact@saabsa.com",
-                "availableLanguage": "English"
-            },
-            {
-                "@type": "ContactPoint",
-                "contactType": "Customer Service",
-                "email": "contact@saabsa.com",
-                "availableLanguage": "English"
-            }
-        ],
-        "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "US"
-        },
-        "areaServed": "Worldwide",
-        "knowsAbout": [
-            "AI Software Development",
-            "Healthcare Technology",
-            "EHR Systems",
-            "Telehealth Platforms",
-            "Custom Software Development",
-            "Cloud Infrastructure",
-            "Data Analytics"
-        ],
-        "makesOffer": [
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Custom Software Development",
-                    "description": "Bespoke applications built to scale with your business"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "AI-Powered Business Solutions",
-                    "description": "Leverage artificial intelligence to automate processes and extract insights"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Healthcare Technology Consulting",
-                    "description": "Strategic technology guidance for healthcare organizations"
-                }
-            }
-        ]
-    }
-    </script>
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        /* Critical CSS to prevent render blocking */
+        body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;margin:0;padding:0;box-sizing:border-box}
+        *{box-sizing:border-box}
+        .glass-effect{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+        .hero-gradient{background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%)}
+    </style>
     
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Patientree AI",
-        "applicationCategory": "HealthcareApplication",
-        "operatingSystem": "Web",
-        "provider": {
-            "@type": "Organization",
-            "name": "Saabsa Solutions",
-            "url": "https://www.saabsa.com"
-        },
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "150"
-        },
-        "description": "AI-powered healthcare automation platform for seamless clinic operations, appointment management, scheduling, billing, patient engagement, and EHR integration.",
-        "url": "https://www.patientree.com",
-        "featureList": [
-            "AI-Driven Automation",
-            "Real-Time Calendar Sync",
-            "EHR Integration",
-            "Automated Reminders",
-            "Patient Engagement Tools"
-        ]
-    }
-    </script>
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Saabsa Solutions",
-        "url": "https://www.saabsa.com",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.saabsa.com/?s={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-    </script>
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://www.saabsa.com"
-            }
-        ]
-    }
-    </script>
+    <!-- Tailwind CSS CDN - Deferred -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
     
     <style>
         * {
@@ -427,7 +313,7 @@
                 </div>
                 <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
                     <span class="block mb-2">Saabsa Solutions:</span>
-                    <span class="block mt-2 text-yellow-300">AI-Powered Healthcare Technology</span>
+                    <span class="block mt-2 text-yellow-300" fetchpriority="high">AI-Powered Healthcare Technology</span>
                 </h1>
                 <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-90 leading-relaxed">
                     Saabsa Solutions is an emerging tech company focused on AI and software for healthcare. We build cutting-edge custom software, EHR systems, telehealth platforms, and Patientree AI - revolutionizing healthcare automation with AI-powered scheduling, billing, and patient engagement.
@@ -482,7 +368,7 @@
                 <div class="animate-slide-in">
                     <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-3xl shadow-xl">
                         <div class="flex justify-center mb-6">
-                            <img src="patientreeLogo.png" alt="Patientree AI Platform" class="max-w-[280px] w-auto h-auto rounded-2xl shadow-lg object-contain">
+                            <img src="patientreeLogo.png" alt="Patientree AI Platform" width="280" height="280" class="max-w-[280px] w-auto h-auto rounded-2xl shadow-lg object-contain" loading="lazy">
                         </div>
                         <div class="space-y-4">
                             <h3 class="text-2xl font-bold text-gray-900">Why Patientree AI?</h3>
@@ -1040,7 +926,7 @@
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="animate-slide-in">
                     <div class="relative">
-                        <img src="Screenshot_Patientree.png" alt="Saabsa Solutions Innovation" class="rounded-3xl shadow-2xl w-full">
+                        <img src="Screenshot_Patientree.png" alt="Saabsa Solutions Innovation" width="800" height="600" class="rounded-3xl shadow-2xl w-full" loading="lazy">
                         <div class="absolute -bottom-6 -right-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 rounded-2xl shadow-xl">
                             <div class="text-3xl font-black">150+</div>
                             <div class="text-sm opacity-90">Projects Delivered</div>
@@ -1582,6 +1468,145 @@
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(card);
         });
+    </script>
+    
+    <!-- Structured Data for SEO - Loaded at end for performance -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Saabsa Solutions",
+        "alternateName": "Saabsa",
+        "url": "https://www.saabsa.com",
+        "logo": "https://www.saabsa.com/logo.png",
+        "description": "Saabsa Solutions is an emerging tech company focused on AI and software for healthcare. We build custom software, AI-powered solutions, EHR systems, telehealth platforms, and Patientree AI - a revolutionary healthcare automation platform.",
+        "foundingDate": "2020",
+        "foundingLocation": {
+            "@type": "Place",
+            "addressCountry": "US"
+        },
+        "sameAs": [
+            "https://www.linkedin.com/company/saabsa-solutions",
+            "https://x.com/SaabsaSolutions"
+        ],
+        "contactPoint": [
+            {
+                "@type": "ContactPoint",
+                "contactType": "Sales",
+                "email": "contact@saabsa.com",
+                "availableLanguage": "English"
+            },
+            {
+                "@type": "ContactPoint",
+                "contactType": "Customer Service",
+                "email": "contact@saabsa.com",
+                "availableLanguage": "English"
+            }
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US"
+        },
+        "areaServed": "Worldwide",
+        "knowsAbout": [
+            "AI Software Development",
+            "Healthcare Technology",
+            "EHR Systems",
+            "Telehealth Platforms",
+            "Custom Software Development",
+            "Cloud Infrastructure",
+            "Data Analytics"
+        ],
+        "makesOffer": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Custom Software Development",
+                    "description": "Bespoke applications built to scale with your business"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI-Powered Business Solutions",
+                    "description": "Leverage artificial intelligence to automate processes and extract insights"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Healthcare Technology Consulting",
+                    "description": "Strategic technology guidance for healthcare organizations"
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Patientree AI",
+        "applicationCategory": "HealthcareApplication",
+        "operatingSystem": "Web",
+        "provider": {
+            "@type": "Organization",
+            "name": "Saabsa Solutions",
+            "url": "https://www.saabsa.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "150"
+        },
+        "description": "AI-powered healthcare automation platform for seamless clinic operations, appointment management, scheduling, billing, patient engagement, and EHR integration.",
+        "url": "https://www.patientree.com",
+        "featureList": [
+            "AI-Driven Automation",
+            "Real-Time Calendar Sync",
+            "EHR Integration",
+            "Automated Reminders",
+            "Patient Engagement Tools"
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Saabsa Solutions",
+        "url": "https://www.saabsa.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.saabsa.com/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.saabsa.com"
+            }
+        ]
+    }
     </script>
 </body>
 </html>

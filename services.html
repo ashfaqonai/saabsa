@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PXBREVK1K"></script>
+    <!-- Google tag (gtag.js) - Deferred for performance -->
     <script>
+        // Defer Google Analytics initialization
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-1PXBREVK1K');
+        // Load GA script after page load
+        window.addEventListener('load', function() {
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-1PXBREVK1K';
+            document.head.appendChild(script);
+            script.onload = function() {
+                gtag('js', new Date());
+                gtag('config', 'G-1PXBREVK1K');
+            };
+        });
     </script>
     
     <meta charset="UTF-8" />
@@ -19,7 +28,7 @@
     <link rel="apple-touch-icon" href="patientreeLogo.png" />
     
     <!-- Enhanced SEO Meta Tags -->
-    <title>Saabsa Solutions Services - Custom Software, AI Solutions & Healthcare Technology</title>
+    <title>Saabsa Solutions Services - AI Healthcare Technology</title>
     <meta name="description" content="Saabsa Solutions offers comprehensive technology services for healthcare: Custom Software Development, AI-Powered Business Solutions, Cloud Infrastructure, Data Engineering, EHR Systems, and Strategic Consulting. Learn about our healthcare technology services." />
     <meta name="keywords" content="Saabsa Solutions services, custom software development, AI solutions, cloud infrastructure, DevOps, data engineering, analytics, technology consulting, healthcare SaaS, EHR systems, telehealth platforms, healthcare IT" />
     <meta name="author" content="Saabsa Solutions" />
@@ -29,7 +38,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.saabsa.com/services.html" />
-    <meta property="og:title" content="Saabsa Solutions Services - Custom Software & AI Solutions" />
+    <meta property="og:title" content="Saabsa Solutions Services - AI Healthcare Technology" />
     <meta property="og:description" content="Comprehensive technology services from Saabsa Solutions: Custom Software Development, AI-Powered Solutions, Cloud Infrastructure, Data Engineering, and Healthcare Technology Consulting." />
     <meta property="og:image" content="https://www.saabsa.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -40,110 +49,35 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://www.saabsa.com/services.html" />
-    <meta name="twitter:title" content="Saabsa Solutions Services - Custom Software & AI Solutions" />
+    <meta name="twitter:title" content="Saabsa Solutions Services - AI Healthcare Technology" />
     <meta name="twitter:description" content="Comprehensive technology services from Saabsa Solutions: Custom Software Development, AI-Powered Solutions, Cloud Infrastructure, Data Engineering, and Healthcare Technology Consulting." />
     <meta name="twitter:image" content="https://www.saabsa.com/og-image.png" />
     <meta name="twitter:image:alt" content="Saabsa Solutions Services - Custom Software & AI Solutions" />
     
     <link rel="canonical" href="https://www.saabsa.com/services.html" />
     
-    <!-- Fonts -->
+    <!-- Resource Hints for Performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts - Optimized with font-display: swap and reduced weights, loaded asynchronously -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"></noscript>
     
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": "Technology Consulting and Software Development",
-        "provider": {
-            "@type": "Organization",
-            "name": "Saabsa Solutions",
-            "url": "https://www.saabsa.com"
-        },
-        "areaServed": "Worldwide",
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Saabsa Solutions Services",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Custom Software Development",
-                        "description": "We build scalable, secure applications tailored to your business goals"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "AI-Powered Business Solutions",
-                        "description": "Leverage artificial intelligence to automate processes, extract insights, and accelerate growth"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Cloud Infrastructure & DevOps",
-                        "description": "Optimize performance with secure cloud architecture and automated deployment pipelines"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Data Engineering & Analytics",
-                        "description": "Transform raw data into meaningful intelligence with robust pipelines and dashboarding solutions"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Startup & Enterprise Consulting",
-                        "description": "Strategic technology guidance for digital transformation, product planning, and growth strategy"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Healthcare Innovation - Patientree AI",
-                        "description": "Enhance patient engagement and clinic workflows with our AI-driven healthcare platform"
-                    }
-                }
-            ]
-        }
-    }
-    </script>
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        /* Critical CSS to prevent render blocking */
+        body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;margin:0;padding:0;box-sizing:border-box}
+        *{box-sizing:border-box}
+        .glass-effect{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+        .hero-gradient{background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%)}
+    </style>
     
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://www.saabsa.com"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Services",
-                "item": "https://www.saabsa.com/services.html"
-            }
-        ]
-    }
-    </script>
+    <!-- Tailwind CSS CDN - Deferred -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
     
     <style>
         * {
@@ -822,6 +756,96 @@
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(card);
         });
+    </script>
+    
+    <!-- Structured Data for SEO - Loaded at end for performance -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Technology Consulting and Software Development",
+        "provider": {
+            "@type": "Organization",
+            "name": "Saabsa Solutions",
+            "url": "https://www.saabsa.com"
+        },
+        "areaServed": "Worldwide",
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Saabsa Solutions Services",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Custom Software Development",
+                        "description": "We build scalable, secure applications tailored to your business goals"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "AI-Powered Business Solutions",
+                        "description": "Leverage artificial intelligence to automate processes, extract insights, and accelerate growth"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Cloud Infrastructure & DevOps",
+                        "description": "Optimize performance with secure cloud architecture and automated deployment pipelines"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Data Engineering & Analytics",
+                        "description": "Transform raw data into meaningful intelligence with robust pipelines and dashboarding solutions"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Startup & Enterprise Consulting",
+                        "description": "Strategic technology guidance for digital transformation, product planning, and growth strategy"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Healthcare Innovation - Patientree AI",
+                        "description": "Enhance patient engagement and clinic workflows with our AI-driven healthcare platform"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.saabsa.com"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Services",
+                "item": "https://www.saabsa.com/services.html"
+            }
+        ]
+    }
     </script>
 </body>
 </html>
