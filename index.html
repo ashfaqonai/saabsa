@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) - Deferred for performance -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KNHWRJX0BL"></script>
     <script>
-        // Defer Google Analytics initialization
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        // Load GA script after page load
+        gtag('js', new Date());
+        gtag('config', 'G-KNHWRJX0BL');
+    </script>
+    
+    <!-- Google tag (gtag.js) - Legacy tracking ID (G-1PXBREVK1K) -->
+    <script>
+        // Load legacy GA script after page load for performance
         window.addEventListener('load', function() {
             var script = document.createElement('script');
             script.async = true;
