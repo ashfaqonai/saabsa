@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="bimiGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="50%" stop-color="#0F3D6E"/>
+      <stop offset="50%" stop-color="#F26A21"/>
+    </linearGradient>
+    <clipPath id="bimiHexClip">
+      <path d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
+    </clipPath>
+  </defs>
+  <path fill="url(#bimiGradient)" d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
+  <g clip-path="url(#bimiHexClip)" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round">
+    <line x1="30" y1="40" x2="90" y2="40"/>
+    <circle cx="30" cy="40" r="3" fill="#FFFFFF"/>
+    <circle cx="90" cy="40" r="3" fill="#FFFFFF"/>
+    <line x1="30" y1="60" x2="90" y2="60"/>
+    <circle cx="30" cy="60" r="3" fill="#FFFFFF"/>
+    <circle cx="90" cy="60" r="3" fill="#FFFFFF"/>
+    <line x1="30" y1="80" x2="90" y2="80"/>
+    <circle cx="30" cy="80" r="3" fill="#FFFFFF"/>
+    <circle cx="90" cy="80" r="3" fill="#FFFFFF"/>
+  </g>
+</svg>
+
