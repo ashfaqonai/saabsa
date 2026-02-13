@@ -39,6 +39,29 @@ jobs:
         run: |
           cd scripts && npm install && cd ..
           node scripts/build-blog.js
+      - name: Optimize images
+        run: |
+          npm install --no-save sharp
+          node -e "
+          const sharp = require('sharp');
+          const fs = require('fs');
+          async function opt(file, maxWidth) {
+            if (!fs.existsSync(file)) return;
+            const info = await sharp(file).metadata();
+            const w = Math.min(info.width || maxWidth, maxWidth);
+            await sharp(file).resize(w).png({ quality: 80, compressionLevel: 9 }).toFile(file + '.tmp');
+            fs.renameSync(file + '.tmp', file);
+            const before = (fs.statSync(file).size / 1024).toFixed(0);
+            console.log('  ' + file + ' -> ' + before + ' KB (' + w + 'px)');
+          }
+          (async () => {
+            console.log('Optimizing images...');
+            await opt('patientreeLogo.png', 560);
+            await opt('og-image.png', 1200);
+            await opt('Screenshot_Patientree.png', 800);
+            console.log('Done.');
+          })().catch(e => { console.warn('Image optimization skipped:', e.message); });
+          "
       - name: Inject admin password from secret
         run: |
           sed -i "s/__ADMIN_PASSWORD_PLACEHOLDER__/${{ secrets.ADMIN_PASSWORD }}/g" admin-config.js
