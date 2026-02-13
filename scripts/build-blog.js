@@ -1,4 +1,162 @@
-<!DOCTYPE html>
+#!/usr/bin/env node
+/**
+ * Blog Build Script for Saabsa Solutions
+ *
+ * Reads post files from _posts/ and generates:
+ *   - Static HTML pages in blog/  (fully rendered, SEO-ready)
+ *   - _posts/posts.json           (post index for the blog listing page)
+ *   - sitemap.xml                 (updated with all blog post URLs)
+ *
+ * Supports two post formats:
+ *   - Markdown (.md) with YAML front matter
+ *   - JSON (.json) with bodyHtml field
+ */
+
+const fs = require('fs');
+const path = require('path');
+const { marked } = require('marked');
+
+const ROOT = path.join(__dirname, '..');
+const POSTS_DIR = path.join(ROOT, '_posts');
+const BLOG_DIR = path.join(ROOT, 'blog');
+const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
+const SITE_URL = 'https://www.saabsa.com';
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function escapeAttr(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return `${months[month - 1]} ${day}, ${year}`;
+}
+
+/** Parse simple YAML-like front matter (key: "value" or key: value) */
+function parseFrontMatter(text) {
+    const result = {};
+    for (const line of text.split('\n')) {
+        const trimmed = line.trim();
+        // Match: key: "quoted value"
+        const quotedMatch = trimmed.match(/^(\w+):\s*"(.*)"\s*$/);
+        if (quotedMatch) {
+            result[quotedMatch[1]] = quotedMatch[2].replace(/\\"/g, '"');
+            continue;
+        }
+        // Match: key: unquoted value
+        const unquotedMatch = trimmed.match(/^(\w+):\s*(.+?)\s*$/);
+        if (unquotedMatch && unquotedMatch[2] !== '') {
+            result[unquotedMatch[1]] = unquotedMatch[2];
+        }
+    }
+    return result;
+}
+
+// ---------------------------------------------------------------------------
+// Read posts
+// ---------------------------------------------------------------------------
+
+function readPosts() {
+    const files = fs.readdirSync(POSTS_DIR);
+    const posts = [];
+
+    for (const file of files) {
+        if (file === 'posts.json') continue;
+
+        const filePath = path.join(POSTS_DIR, file);
+        const stat = fs.statSync(filePath);
+        if (!stat.isFile()) continue;
+
+        try {
+            if (file.endsWith('.md')) {
+                const raw = fs.readFileSync(filePath, 'utf8');
+                const fmMatch = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+                if (!fmMatch) {
+                    console.warn(`  Skipping ${file}: no front matter found`);
+                    continue;
+                }
+                const meta = parseFrontMatter(fmMatch[1]);
+                const bodyHtml = marked.parse(fmMatch[2]);
+                posts.push({
+                    title: meta.title || 'Untitled',
+                    date: meta.date || null,
+                    category: meta.category || 'General',
+                    excerpt: meta.excerpt || '',
+                    slug: meta.slug || file.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, ''),
+                    bodyHtml,
+                    sourceFile: file
+                });
+
+            } else if (file.endsWith('.json')) {
+                const raw = fs.readFileSync(filePath, 'utf8');
+                const data = JSON.parse(raw);
+                const dateMatch = file.match(/^(\d{4}-\d{2}-\d{2})[_-]/);
+                posts.push({
+                    title: data.title || 'Untitled',
+                    date: dateMatch ? dateMatch[1] : null,
+                    category: data.publishCategory || data.category || 'General',
+                    excerpt: data.excerpt || '',
+                    slug: data.slug || file.replace(/^\d{4}-\d{2}-\d{2}[_-]/, '').replace(/\.json$/, ''),
+                    bodyHtml: data.bodyHtml || '',
+                    sourceFile: file
+                });
+            }
+        } catch (err) {
+            console.error(`  Error processing ${file}:`, err.message);
+        }
+    }
+
+    // Newest first
+    posts.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+    return posts;
+}
+
+// ---------------------------------------------------------------------------
+// Generate static HTML for a single blog post
+// ---------------------------------------------------------------------------
+
+function generatePostHtml(post) {
+    const postUrl = `${SITE_URL}/blog/${post.slug}.html`;
+    const postImage = `${SITE_URL}/og-image.png`;
+    const postExcerpt = post.excerpt || post.title;
+    const formattedDate = formatDate(post.date);
+
+    const jsonLd = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "description": postExcerpt,
+        "image": postImage,
+        "datePublished": post.date,
+        "dateModified": post.date,
+        "author": { "@type": "Organization", "name": "Saabsa Solutions", "url": SITE_URL },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Saabsa Solutions",
+            "url": SITE_URL,
+            "logo": { "@type": "ImageObject", "url": `${SITE_URL}/patientreeLogo.png` }
+        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": postUrl },
+        "url": postUrl,
+        "articleSection": post.category || "General",
+        "inLanguage": "en-US"
+    });
+
+    return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
@@ -23,32 +181,32 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- SEO -->
-    <title>AI in Healthcare 2026 | Saabsa Solutions Blog</title>
-    <meta name="description" content="A concise guide to practical AI improvements in clinical operations." />
+    <title>${escapeHtml(post.title)} | Saabsa Solutions Blog</title>
+    <meta name="description" content="${escapeAttr(postExcerpt)}" />
     <meta name="author" content="Saabsa Solutions" />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://www.saabsa.com/blog/ai-in-healthcare-2026.html" />
-    <meta property="og:title" content="AI in Healthcare 2026" />
-    <meta property="og:description" content="A concise guide to practical AI improvements in clinical operations." />
-    <meta property="og:image" content="https://www.saabsa.com/og-image.png" />
+    <meta property="og:url" content="${postUrl}" />
+    <meta property="og:title" content="${escapeAttr(post.title)}" />
+    <meta property="og:description" content="${escapeAttr(postExcerpt)}" />
+    <meta property="og:image" content="${postImage}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="AI in Healthcare 2026" />
+    <meta property="og:image:alt" content="${escapeAttr(post.title)}" />
     <meta property="og:site_name" content="Saabsa Solutions" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.saabsa.com/blog/ai-in-healthcare-2026.html" />
-    <meta name="twitter:title" content="AI in Healthcare 2026" />
-    <meta name="twitter:description" content="A concise guide to practical AI improvements in clinical operations." />
-    <meta name="twitter:image" content="https://www.saabsa.com/og-image.png" />
-    <meta name="twitter:image:alt" content="AI in Healthcare 2026" />
+    <meta name="twitter:url" content="${postUrl}" />
+    <meta name="twitter:title" content="${escapeAttr(post.title)}" />
+    <meta name="twitter:description" content="${escapeAttr(postExcerpt)}" />
+    <meta name="twitter:image" content="${postImage}" />
+    <meta name="twitter:image:alt" content="${escapeAttr(post.title)}" />
 
-    <link rel="canonical" href="https://www.saabsa.com/blog/ai-in-healthcare-2026.html" />
+    <link rel="canonical" href="${postUrl}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +217,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"AI in Healthcare 2026","description":"A concise guide to practical AI improvements in clinical operations.","image":"https://www.saabsa.com/og-image.png","datePublished":"2026-02-13","dateModified":"2026-02-13","author":{"@type":"Organization","name":"Saabsa Solutions","url":"https://www.saabsa.com"},"publisher":{"@type":"Organization","name":"Saabsa Solutions","url":"https://www.saabsa.com","logo":{"@type":"ImageObject","url":"https://www.saabsa.com/patientreeLogo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.saabsa.com/blog/ai-in-healthcare-2026.html"},"url":"https://www.saabsa.com/blog/ai-in-healthcare-2026.html","articleSection":"Technology","inLanguage":"en-US"}</script>
+    <script type="application/ld+json">${jsonLd}</script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -159,12 +317,12 @@
             <div class="glass-effect p-8 md:p-12 rounded-3xl shadow-xl">
                 <article>
                     <div class="flex items-center gap-4 mb-6 text-sm text-gray-500">
-                        <time datetime="2026-02-13">February 13, 2026</time>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Technology</span>
+                        ${post.date ? `<time datetime="${post.date}">${formattedDate}</time>` : ''}
+                        ${post.category ? `<span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">${escapeHtml(post.category)}</span>` : ''}
                     </div>
-                    <h1 class="text-4xl md:text-5xl font-black mb-8 text-gray-900">AI in Healthcare 2026</h1>
+                    <h1 class="text-4xl md:text-5xl font-black mb-8 text-gray-900">${escapeHtml(post.title)}</h1>
                     <div class="blog-content">
-                        <h2>Why it matters</h2><p>AI reduces repetitive tasks and helps teams focus on patient outcomes.</p><h2>Getting started</h2><ol><li>Choose one workflow</li><li>Pilot with clear metrics</li><li>Scale after two weeks</li></ol>
+                        ${post.bodyHtml}
                     </div>
                 </article>
             </div>
@@ -237,10 +395,103 @@
                 </div>
             </div>
             <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2026 Saabsa Solutions. All rights reserved. | <a href="#" class="hover:text-white transition-colors">Privacy Policy</a> | <a href="#" class="hover:text-white transition-colors">Terms of Service</a></p>
+                <p>&copy; ${new Date().getFullYear()} Saabsa Solutions. All rights reserved. | <a href="#" class="hover:text-white transition-colors">Privacy Policy</a> | <a href="#" class="hover:text-white transition-colors">Terms of Service</a></p>
             </div>
         </div>
     </footer>
 
 </body>
-</html>
+</html>`;
+}
+
+// ---------------------------------------------------------------------------
+// Generate posts.json
+// ---------------------------------------------------------------------------
+
+function generatePostsJson(posts) {
+    const data = {
+        posts: posts.map(p => ({
+            title: p.title,
+            date: p.date,
+            category: p.category,
+            excerpt: p.excerpt,
+            slug: p.slug
+        }))
+    };
+    fs.writeFileSync(
+        path.join(POSTS_DIR, 'posts.json'),
+        JSON.stringify(data, null, 2) + '\n',
+        'utf8'
+    );
+}
+
+// ---------------------------------------------------------------------------
+// Generate sitemap.xml
+// ---------------------------------------------------------------------------
+
+function generateSitemap(posts) {
+    const today = new Date().toISOString().split('T')[0];
+
+    const staticPages = [
+        { loc: '/',              priority: '1.0',  changefreq: 'weekly',  lastmod: today },
+        { loc: '/services.html', priority: '0.9',  changefreq: 'monthly', lastmod: today },
+        { loc: '/blog.html',     priority: '0.8',  changefreq: 'weekly',  lastmod: today },
+    ];
+
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+    for (const page of staticPages) {
+        xml += `  <url>\n`;
+        xml += `    <loc>${SITE_URL}${page.loc}</loc>\n`;
+        xml += `    <lastmod>${page.lastmod}</lastmod>\n`;
+        xml += `    <priority>${page.priority}</priority>\n`;
+        xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
+        xml += `  </url>\n`;
+    }
+
+    xml += `  <!-- Individual Blog Posts -->\n`;
+    for (const post of posts) {
+        xml += `  <url>\n`;
+        xml += `    <loc>${SITE_URL}/blog/${post.slug}.html</loc>\n`;
+        xml += `    <lastmod>${post.date || today}</lastmod>\n`;
+        xml += `    <priority>0.7</priority>\n`;
+        xml += `    <changefreq>monthly</changefreq>\n`;
+        xml += `  </url>\n`;
+    }
+
+    xml += `</urlset>\n`;
+    fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
+}
+
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
+
+console.log('Building blog...\n');
+
+// Ensure blog/ directory exists
+if (!fs.existsSync(BLOG_DIR)) {
+    fs.mkdirSync(BLOG_DIR, { recursive: true });
+}
+
+const posts = readPosts();
+console.log(`Found ${posts.length} post(s):\n`);
+
+// Generate static HTML for each post
+for (const post of posts) {
+    const html = generatePostHtml(post);
+    const outPath = path.join(BLOG_DIR, `${post.slug}.html`);
+    fs.writeFileSync(outPath, html, 'utf8');
+    console.log(`  + blog/${post.slug}.html`);
+}
+
+// Generate posts.json
+generatePostsJson(posts);
+console.log(`  + _posts/posts.json  (${posts.length} entries)`);
+
+// Generate sitemap
+generateSitemap(posts);
+console.log(`  + sitemap.xml`);
+
+console.log('\nBuild complete!');

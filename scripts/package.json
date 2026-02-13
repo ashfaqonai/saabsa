@@ -1,0 +1,11 @@
+{
+  "name": "saabsa-blog-builder",
+  "private": true,
+  "description": "Build script for Saabsa Solutions blog - generates static HTML pages from _posts/",
+  "scripts": {
+    "build": "node build-blog.js"
+  },
+  "dependencies": {
+    "marked": "^15.0.0"
+  }
+}

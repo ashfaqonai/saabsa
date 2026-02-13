@@ -31,6 +31,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build blog (generate static pages, posts.json, sitemap)
+        run: |
+          cd scripts && npm install && cd ..
+          node scripts/build-blog.js
       - name: Inject admin password from secret
         run: |
           sed -i "s/__ADMIN_PASSWORD_PLACEHOLDER__/${{ secrets.ADMIN_PASSWORD }}/g" admin-config.js

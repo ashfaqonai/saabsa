@@ -382,13 +382,13 @@
                         <time datetime="${post.date}">${formatDate(post.date)}</time>
                         ${post.category ? `<span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">${post.category}</span>` : ''}
                     </div>
-                    <h2 class="text-3xl font-bold mb-4 text-gray-900">
-                        <a href="blog-post.html?slug=${post.slug}" class="hover:text-[#0F3D6E] transition-colors">
+                        <h2 class="text-3xl font-bold mb-4 text-gray-900">
+                        <a href="blog/${post.slug}.html" class="hover:text-[#0F3D6E] transition-colors">
                             ${post.title}
                         </a>
                     </h2>
                     ${post.excerpt ? `<p class="text-lg text-gray-600 mb-4">${post.excerpt}</p>` : ''}
-                    <a href="blog-post.html?slug=${post.slug}" class="inline-block text-[#0F3D6E] font-semibold hover:underline">
+                    <a href="blog/${post.slug}.html" class="inline-block text-[#0F3D6E] font-semibold hover:underline">
                         Read More →
                     </a>
                 </article>
@@ -425,7 +425,7 @@
                     "headline": post.title,
                     "description": post.excerpt || post.title,
                     "datePublished": post.date,
-                    "url": `https://www.saabsa.com/blog-post.html?slug=${post.slug}`,
+                    "url": `https://www.saabsa.com/blog/${post.slug}.html`,
                     "author": {
                         "@type": "Organization",
                         "name": "Saabsa Solutions"

@@ -57,8 +57,6 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Marked.js for Markdown rendering -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <style>
         * {
@@ -271,11 +269,14 @@
     </footer>
 
     <script>
-        // Get slug from URL
+        // Redirect old ?slug= URLs to the new static blog pages
         const urlParams = new URLSearchParams(window.location.search);
         const slug = urlParams.get('slug');
 
-        if (!slug) {
+        if (slug) {
+            // Redirect to the static page at /blog/slug.html
+            window.location.replace(`/blog/${slug}.html`);
+        } else {
             document.getElementById('blogPostContent').innerHTML = `
                 <div class="text-center">
                     <h1 class="text-3xl font-bold mb-4 text-gray-900">Post Not Found</h1>
@@ -283,151 +284,9 @@
                     <a href="blog.html" class="text-[#0F3D6E] font-semibold hover:underline">← Back to Blog</a>
                 </div>
             `;
-        } else {
-            loadBlogPost(slug);
         }
 
-        async function loadBlogPost(slug) {
-            try {
-                // First, get post metadata
-                const postsResponse = await fetch('_posts/posts.json');
-                const postsData = await postsResponse.json();
-                const post = postsData.posts.find(p => p.slug === slug);
-
-                if (!post) {
-                    throw new Error('Post not found');
-                }
-
-                // Load the markdown content
-                const markdownResponse = await fetch(`_posts/${post.date}-${slug}.md`);
-                if (!markdownResponse.ok) {
-                    throw new Error('Post content not found');
-                }
-                const markdown = await markdownResponse.text();
-
-                // Parse front matter and content
-                const frontMatterMatch = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-                let content = markdown;
-                if (frontMatterMatch) {
-                    content = frontMatterMatch[2];
-                }
-
-                // Update page title and meta
-                document.title = `${post.title} | Saabsa Solutions Blog`;
-                const metaDescription = document.querySelector('meta[name="description"]');
-                if (metaDescription) {
-                    metaDescription.content = post.excerpt || post.title;
-                }
-
-                // Update Open Graph meta tags
-                const updateMetaTag = (property, content) => {
-                    let meta = document.querySelector(`meta[property="${property}"]`) || document.querySelector(`meta[name="${property}"]`);
-                    if (!meta) {
-                        meta = document.createElement('meta');
-                        if (property.startsWith('og:')) {
-                            meta.setAttribute('property', property);
-                        } else {
-                            meta.setAttribute('name', property);
-                        }
-                        document.head.appendChild(meta);
-                    }
-                    meta.setAttribute('content', content);
-                };
-
-                const postUrl = `https://www.saabsa.com/blog-post.html?slug=${slug}`;
-                const postImage = post.image || 'https://www.saabsa.com/og-image.png';
-                const postExcerpt = post.excerpt || post.title;
-
-                updateMetaTag('og:url', postUrl);
-                updateMetaTag('og:title', post.title);
-                updateMetaTag('og:description', postExcerpt);
-                updateMetaTag('og:image', postImage);
-                updateMetaTag('twitter:url', postUrl);
-                updateMetaTag('twitter:title', post.title);
-                updateMetaTag('twitter:description', postExcerpt);
-                updateMetaTag('twitter:image', postImage);
-
-                // Update canonical URL
-                let canonical = document.querySelector('link[rel="canonical"]');
-                if (!canonical) {
-                    canonical = document.createElement('link');
-                    canonical.setAttribute('rel', 'canonical');
-                    document.head.appendChild(canonical);
-                }
-                canonical.setAttribute('href', postUrl);
-
-                // Add JSON-LD structured data for Google indexing
-                const jsonLd = {
-                    "@context": "https://schema.org",
-                    "@type": "BlogPosting",
-                    "headline": post.title,
-                    "description": postExcerpt,
-                    "image": postImage,
-                    "datePublished": post.date,
-                    "dateModified": post.date,
-                    "author": {
-                        "@type": "Organization",
-                        "name": "Saabsa Solutions",
-                        "url": "https://www.saabsa.com"
-                    },
-                    "publisher": {
-                        "@type": "Organization",
-                        "name": "Saabsa Solutions",
-                        "url": "https://www.saabsa.com",
-                        "logo": {
-                            "@type": "ImageObject",
-                            "url": "https://www.saabsa.com/patientreeLogo.png"
-                        }
-                    },
-                    "mainEntityOfPage": {
-                        "@type": "WebPage",
-                        "@id": postUrl
-                    },
-                    "url": postUrl,
-                    "articleSection": post.category || "General",
-                    "inLanguage": "en-US"
-                };
-                let scriptTag = document.querySelector('script[type="application/ld+json"]');
-                if (!scriptTag) {
-                    scriptTag = document.createElement('script');
-                    scriptTag.type = 'application/ld+json';
-                    document.head.appendChild(scriptTag);
-                }
-                scriptTag.textContent = JSON.stringify(jsonLd);
-
-                // Format date
-                const formattedDate = new Date(post.date).toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                });
-
-                // Render content
-                const html = `
-                    <article>
-                        <div class="flex items-center gap-4 mb-6 text-sm text-gray-500">
-                            <time datetime="${post.date}">${formattedDate}</time>
-                            ${post.category ? `<span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">${post.category}</span>` : ''}
-                        </div>
-                        <h1 class="text-4xl md:text-5xl font-black mb-8 text-gray-900">${post.title}</h1>
-                        <div class="blog-content">
-                            ${marked.parse(content)}
-                        </div>
-                    </article>
-                `;
-
-                document.getElementById('blogPostContent').innerHTML = html;
-            } catch (error) {
-                console.error('Error loading blog post:', error);
-                document.getElementById('blogPostContent').innerHTML = `
-                    <div class="text-center">
-                        <h1 class="text-3xl font-bold mb-4 text-gray-900">Post Not Found</h1>
-                        <p class="text-gray-600 mb-6">The blog post you're looking for doesn't exist or couldn't be loaded.</p>
-                        <a href="blog.html" class="text-[#0F3D6E] font-semibold hover:underline">← Back to Blog</a>
-                    </div>
-                `;
-            }
-        }
+        // Old dynamic loading code removed — this page now just redirects to static pages
     </script>
 </body>
 </html>

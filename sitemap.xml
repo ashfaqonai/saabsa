@@ -2,32 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.saabsa.com/</loc>
-    <lastmod>2025-02-12</lastmod>
+    <lastmod>2026-02-13</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.saabsa.com/services.html</loc>
-    <lastmod>2025-02-12</lastmod>
+    <lastmod>2026-02-13</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://www.saabsa.com/blog.html</loc>
-    <lastmod>2025-02-12</lastmod>
+    <lastmod>2026-02-13</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
   <!-- Individual Blog Posts -->
   <url>
-    <loc>https://www.saabsa.com/blog-post.html?slug=welcome-to-saabsa-solutions-blog</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://www.saabsa.com/blog/ai-in-healthcare-2026.html</loc>
+    <lastmod>2026-02-13</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.saabsa.com/blog-post.html?slug=how-saabsa-solutions-is-redefining-custom-software-development-with-ai</loc>
+    <loc>https://www.saabsa.com/blog/how-saabsa-solutions-is-redefining-custom-software-development-with-ai.html</loc>
     <lastmod>2025-12-11</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/welcome-to-saabsa-solutions-blog.html</loc>
+    <lastmod>2025-01-15</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
