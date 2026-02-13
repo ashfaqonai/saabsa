@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "title": "AI in Healthcare 2026",
+      "slug": "ai-in-healthcare-2026",
+      "url": "/blog/ai-in-healthcare-2026.html",
+      "excerpt": "A concise guide to practical AI improvements in clinical operations.",
+      "image": "",
+      "tags": []
+    },
+    {
       "title": "Welcome to the Saabsa Solutions Blog",
       "date": "2025-01-15",
       "category": "Company News",
@@ -16,4 +24,3 @@
     }
   ]
 }
-
