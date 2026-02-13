@@ -91,8 +91,8 @@
             </form>
             <div id="loginError" class="error-message hidden"></div>
             <div class="mt-6 text-center text-sm text-gray-500">
-                <p>Default password is set in admin-config.js</p>
-                <p class="mt-2 text-xs">Change it after first login for security</p>
+                <p>Password is managed via GitHub repository secrets</p>
+                <p class="mt-2 text-xs">Set ADMIN_PASSWORD in Settings &gt; Secrets and variables &gt; Actions</p>
             </div>
         </div>
     </div>
@@ -224,9 +224,15 @@
             const password = document.getElementById('password').value;
             const errorDiv = document.getElementById('loginError');
             
-            // Get password from config
-            const adminPassword = window.ADMIN_CONFIG?.password || 'saabsa2025';
+            // Get password from config (injected from GitHub Secrets at deploy time)
+            const adminPassword = window.ADMIN_CONFIG?.password;
             
+            if (!adminPassword || adminPassword === '__ADMIN_PASSWORD_PLACEHOLDER__') {
+                errorDiv.textContent = 'Admin password not configured. Please set the ADMIN_PASSWORD secret in GitHub repository settings.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
             if (password === adminPassword) {
                 localStorage.setItem('adminAuthenticated', 'true');
                 showAdminPanel();

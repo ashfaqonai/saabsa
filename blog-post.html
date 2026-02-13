@@ -356,6 +356,45 @@
                 }
                 canonical.setAttribute('href', postUrl);
 
+                // Add JSON-LD structured data for Google indexing
+                const jsonLd = {
+                    "@context": "https://schema.org",
+                    "@type": "BlogPosting",
+                    "headline": post.title,
+                    "description": postExcerpt,
+                    "image": postImage,
+                    "datePublished": post.date,
+                    "dateModified": post.date,
+                    "author": {
+                        "@type": "Organization",
+                        "name": "Saabsa Solutions",
+                        "url": "https://www.saabsa.com"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "Saabsa Solutions",
+                        "url": "https://www.saabsa.com",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://www.saabsa.com/patientreeLogo.png"
+                        }
+                    },
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": postUrl
+                    },
+                    "url": postUrl,
+                    "articleSection": post.category || "General",
+                    "inLanguage": "en-US"
+                };
+                let scriptTag = document.querySelector('script[type="application/ld+json"]');
+                if (!scriptTag) {
+                    scriptTag = document.createElement('script');
+                    scriptTag.type = 'application/ld+json';
+                    document.head.appendChild(scriptTag);
+                }
+                scriptTag.textContent = JSON.stringify(jsonLd);
+
                 // Format date
                 const formattedDate = new Date(post.date).toLocaleDateString('en-US', { 
                     year: 'numeric', 
