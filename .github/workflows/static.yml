@@ -56,7 +56,7 @@ jobs:
           }
           (async () => {
             console.log('Optimizing images...');
-            await opt('patientreeLogo.png', 560);
+            await opt('patientreeLogo.png', 280);
             await opt('og-image.png', 1200);
             await opt('Screenshot_Patientree.png', 800);
             console.log('Done.');
