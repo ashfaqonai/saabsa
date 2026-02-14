@@ -14,6 +14,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 const { marked } = require('marked');
 
 const ROOT = path.join(__dirname, '..');
@@ -21,6 +22,7 @@ const POSTS_DIR = path.join(ROOT, '_posts');
 const BLOG_DIR = path.join(ROOT, 'blog');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const SITE_URL = 'https://www.saabsa.com';
+const PEXELS_API_KEY = process.env.PEXELS_API_KEY || '';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -67,6 +69,98 @@ function parseFrontMatter(text) {
 }
 
 // ---------------------------------------------------------------------------
+// Pexels image fetching
+// ---------------------------------------------------------------------------
+
+/**
+ * Fetch a landscape photo from Pexels based on a keyword.
+ * Returns { url, photographer, photographerUrl, pexelsUrl } or null.
+ */
+function fetchPexelsImage(keyword) {
+    if (!PEXELS_API_KEY || !keyword) return Promise.resolve(null);
+
+    const query = encodeURIComponent(keyword);
+    const apiUrl = `https://api.pexels.com/v1/search?query=${query}&per_page=1&orientation=landscape`;
+
+    return new Promise((resolve) => {
+        const req = https.request(apiUrl, {
+            headers: { 'Authorization': PEXELS_API_KEY }
+        }, (res) => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+                try {
+                    const json = JSON.parse(data);
+                    if (json.photos && json.photos.length > 0) {
+                        const photo = json.photos[0];
+                        resolve({
+                            url: photo.src.large2x || photo.src.large,       // ~1880px wide
+                            medium: photo.src.medium,                         // ~350px (for listing)
+                            photographer: photo.photographer,
+                            photographerUrl: photo.photographer_url,
+                            pexelsUrl: photo.url
+                        });
+                    } else {
+                        console.warn(`    No Pexels results for "${keyword}"`);
+                        resolve(null);
+                    }
+                } catch (e) {
+                    console.warn(`    Pexels API parse error for "${keyword}":`, e.message);
+                    resolve(null);
+                }
+            });
+        });
+        req.on('error', (e) => {
+            console.warn(`    Pexels API request error for "${keyword}":`, e.message);
+            resolve(null);
+        });
+        req.end();
+    });
+}
+
+/**
+ * Fetch Pexels images for all posts that need them.
+ * Respects existing featuredImageUrl and skips if no API key is set.
+ */
+async function enrichPostsWithImages(posts) {
+    if (!PEXELS_API_KEY) {
+        console.log('  PEXELS_API_KEY not set — skipping image fetch.\n');
+        return;
+    }
+
+    console.log('  Fetching images from Pexels...');
+    for (const post of posts) {
+        // If the post already has a manual image URL, skip Pexels
+        if (post.imageUrl) {
+            console.log(`    ✓ ${post.slug} (already has image)`);
+            continue;
+        }
+
+        const keyword = post.imageKeyword;
+        if (!keyword) {
+            console.log(`    - ${post.slug} (no imageKeyword, skipping)`);
+            continue;
+        }
+
+        const img = await fetchPexelsImage(keyword);
+        if (img) {
+            post.imageUrl = img.url;
+            post.imageMedium = img.medium;
+            post.photographer = img.photographer;
+            post.photographerUrl = img.photographerUrl;
+            post.pexelsUrl = img.pexelsUrl;
+            console.log(`    ✓ ${post.slug} → "${keyword}" (by ${img.photographer})`);
+        } else {
+            console.log(`    ✗ ${post.slug} → "${keyword}" (no result)`);
+        }
+
+        // Small delay to respect Pexels rate limits (200 req/hr)
+        await new Promise(r => setTimeout(r, 200));
+    }
+    console.log('');
+}
+
+// ---------------------------------------------------------------------------
 // Read posts
 // ---------------------------------------------------------------------------
 
@@ -98,6 +192,8 @@ function readPosts() {
                     excerpt: meta.excerpt || '',
                     slug: meta.slug || file.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, ''),
                     bodyHtml,
+                    imageKeyword: meta.imageKeyword || '',
+                    imageUrl: meta.featuredImageUrl || '',
                     sourceFile: file
                 });
 
@@ -112,6 +208,8 @@ function readPosts() {
                     excerpt: data.excerpt || '',
                     slug: data.slug || file.replace(/^\d{4}-\d{2}-\d{2}[_-]/, '').replace(/\.json$/, ''),
                     bodyHtml: data.bodyHtml || '',
+                    imageKeyword: data.imageKeyword || '',
+                    imageUrl: data.featuredImageUrl || '',
                     sourceFile: file
                 });
             }
@@ -131,7 +229,7 @@ function readPosts() {
 
 function generatePostHtml(post) {
     const postUrl = `${SITE_URL}/blog/${post.slug}.html`;
-    const postImage = `${SITE_URL}/og-image.png`;
+    const postImage = post.imageUrl || `${SITE_URL}/og-image.png`;
     const postExcerpt = post.excerpt || post.title;
     const formattedDate = formatDate(post.date);
 
@@ -314,6 +412,15 @@ function generatePostHtml(post) {
                     &larr; Back to Blog
                 </a>
             </div>
+            ${post.imageUrl ? `
+            <div class="mb-8 rounded-3xl overflow-hidden shadow-xl">
+                <img src="${escapeAttr(post.imageUrl)}" alt="${escapeAttr(post.title)}" class="w-full h-64 md:h-96 object-cover" loading="eager" />
+                ${post.photographer ? `
+                <div class="bg-gray-900 bg-opacity-80 px-4 py-2 text-xs text-gray-300">
+                    Photo by <a href="${escapeAttr(post.photographerUrl || '#')}" target="_blank" rel="noopener noreferrer" class="text-white hover:underline">${escapeHtml(post.photographer)}</a>
+                    on <a href="${escapeAttr(post.pexelsUrl || 'https://www.pexels.com')}" target="_blank" rel="noopener noreferrer" class="text-white hover:underline">Pexels</a>
+                </div>` : ''}
+            </div>` : ''}
             <div class="glass-effect p-8 md:p-12 rounded-3xl shadow-xl">
                 <article>
                     <div class="flex items-center gap-4 mb-6 text-sm text-gray-500">
@@ -415,7 +522,11 @@ function generatePostsJson(posts) {
             date: p.date,
             category: p.category,
             excerpt: p.excerpt,
-            slug: p.slug
+            slug: p.slug,
+            imageUrl: p.imageMedium || p.imageUrl || '',
+            photographer: p.photographer || '',
+            photographerUrl: p.photographerUrl || '',
+            pexelsUrl: p.pexelsUrl || ''
         }))
     };
     fs.writeFileSync(
@@ -468,30 +579,40 @@ function generateSitemap(posts) {
 // Main
 // ---------------------------------------------------------------------------
 
-console.log('Building blog...\n');
+async function main() {
+    console.log('Building blog...\n');
 
-// Ensure blog/ directory exists
-if (!fs.existsSync(BLOG_DIR)) {
-    fs.mkdirSync(BLOG_DIR, { recursive: true });
+    // Ensure blog/ directory exists
+    if (!fs.existsSync(BLOG_DIR)) {
+        fs.mkdirSync(BLOG_DIR, { recursive: true });
+    }
+
+    const posts = readPosts();
+    console.log(`Found ${posts.length} post(s):\n`);
+
+    // Fetch featured images from Pexels
+    await enrichPostsWithImages(posts);
+
+    // Generate static HTML for each post
+    for (const post of posts) {
+        const html = generatePostHtml(post);
+        const outPath = path.join(BLOG_DIR, `${post.slug}.html`);
+        fs.writeFileSync(outPath, html, 'utf8');
+        console.log(`  + blog/${post.slug}.html`);
+    }
+
+    // Generate posts.json
+    generatePostsJson(posts);
+    console.log(`  + _posts/posts.json  (${posts.length} entries)`);
+
+    // Generate sitemap
+    generateSitemap(posts);
+    console.log(`  + sitemap.xml`);
+
+    console.log('\nBuild complete!');
 }
 
-const posts = readPosts();
-console.log(`Found ${posts.length} post(s):\n`);
-
-// Generate static HTML for each post
-for (const post of posts) {
-    const html = generatePostHtml(post);
-    const outPath = path.join(BLOG_DIR, `${post.slug}.html`);
-    fs.writeFileSync(outPath, html, 'utf8');
-    console.log(`  + blog/${post.slug}.html`);
-}
-
-// Generate posts.json
-generatePostsJson(posts);
-console.log(`  + _posts/posts.json  (${posts.length} entries)`);
-
-// Generate sitemap
-generateSitemap(posts);
-console.log(`  + sitemap.xml`);
-
-console.log('\nBuild complete!');
+main().catch(err => {
+    console.error('Build failed:', err);
+    process.exit(1);
+});

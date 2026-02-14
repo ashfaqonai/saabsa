@@ -41,6 +41,8 @@ jobs:
         with:
           node-version: '20'
       - name: Build blog (generate static pages, posts.json, sitemap)
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
         run: |
           cd scripts && npm install && cd ..
           node scripts/build-blog.js

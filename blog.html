@@ -377,20 +377,26 @@
             posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             container.innerHTML = posts.map(post => `
-                <article class="card-hover glass-effect p-8 rounded-3xl shadow-xl">
-                    <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
-                        <time datetime="${post.date}">${formatDate(post.date)}</time>
-                        ${post.category ? `<span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">${post.category}</span>` : ''}
-                    </div>
+                <article class="card-hover glass-effect rounded-3xl shadow-xl overflow-hidden">
+                    ${post.imageUrl ? `
+                    <a href="blog/${post.slug}.html" class="block">
+                        <img src="${post.imageUrl}" alt="${post.title}" class="w-full h-48 md:h-56 object-cover" loading="lazy" />
+                    </a>` : ''}
+                    <div class="p-8">
+                        <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+                            <time datetime="${post.date}">${formatDate(post.date)}</time>
+                            ${post.category ? `<span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">${post.category}</span>` : ''}
+                        </div>
                         <h2 class="text-3xl font-bold mb-4 text-gray-900">
-                        <a href="blog/${post.slug}.html" class="hover:text-[#0F3D6E] transition-colors">
-                            ${post.title}
+                            <a href="blog/${post.slug}.html" class="hover:text-[#0F3D6E] transition-colors">
+                                ${post.title}
+                            </a>
+                        </h2>
+                        ${post.excerpt ? `<p class="text-lg text-gray-600 mb-4">${post.excerpt}</p>` : ''}
+                        <a href="blog/${post.slug}.html" class="inline-block text-[#0F3D6E] font-semibold hover:underline">
+                            Read More →
                         </a>
-                    </h2>
-                    ${post.excerpt ? `<p class="text-lg text-gray-600 mb-4">${post.excerpt}</p>` : ''}
-                    <a href="blog/${post.slug}.html" class="inline-block text-[#0F3D6E] font-semibold hover:underline">
-                        Read More →
-                    </a>
+                    </div>
                 </article>
             `).join('');
         }
