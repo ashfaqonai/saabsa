@@ -1,0 +1,64 @@
+name: Publish next blog post
+
+on:
+  schedule:
+    # 16:20 UTC = 10:20 CST / 11:20 CDT — one post per day
+    - cron: '20 16 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publish oldest pending post
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PENDING_DIR="_posts/pending"
+          POSTS_DIR="_posts"
+
+          # Find the oldest pending JSON file (alphabetical = oldest)
+          NEXT=$(ls -1 "$PENDING_DIR"/*.json 2>/dev/null | sort | head -n1 || true)
+
+          if [ -z "$NEXT" ]; then
+            echo "No pending posts found. Nothing to publish."
+            exit 0
+          fi
+
+          BASENAME=$(basename "$NEXT")
+          DATE=$(date -u +%Y-%m-%d)
+          SLUG="${BASENAME%.json}"
+          DEST="${POSTS_DIR}/${DATE}_${SLUG}.json"
+
+          echo "Publishing: $BASENAME"
+          echo "  From: $NEXT"
+          echo "  To:   $DEST"
+          echo "  Date: $DATE"
+
+          # Move from pending to _posts with date prefix
+          mv "$NEXT" "$DEST"
+
+          echo "remaining=$(ls -1 "$PENDING_DIR"/*.json 2>/dev/null | wc -l)" >> "$GITHUB_OUTPUT"
+          echo "Remaining pending posts: $(ls -1 "$PENDING_DIR"/*.json 2>/dev/null | wc -l)"
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -e
+          if [ -n "$(git status --porcelain _posts/)" ]; then
+            git config user.name "saabsa-bot"
+            git config user.email "bot@users.noreply.github.com"
+            git add _posts/
+            git commit -m "blog: publish scheduled post"
+            git push
+            echo "Committed and pushed. Deploy workflow will trigger."
+          else
+            echo "No changes to commit."
+          fi
