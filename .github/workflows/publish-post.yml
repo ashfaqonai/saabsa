@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       published: ${{ steps.pub.outputs.published }}
+      slug: ${{ steps.pub.outputs.slug }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,6 +53,7 @@ jobs:
           mv "$NEXT" "$DEST"
 
           echo "published=true" >> "$GITHUB_OUTPUT"
+          echo "slug=${SLUG}" >> "$GITHUB_OUTPUT"
           echo "Remaining pending posts: $(ls -1 "$PENDING_DIR"/*.json 2>/dev/null | wc -l)"
 
       - name: Commit and push
@@ -77,3 +79,73 @@ jobs:
       pages: write
       id-token: write
     uses: ./.github/workflows/static.yml
+
+  # Notify search engines about the new post via IndexNow (Bing, Yandex, etc.)
+  # and ping Google/Bing with the updated sitemap.
+  notify-search-engines:
+    needs: [publish, deploy]
+    if: needs.publish.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (for Google Indexing script)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Notify via IndexNow (Bing, Yandex, Naver, Seznam)
+        run: |
+          SITE_URL="https://www.saabsa.com"
+          INDEXNOW_KEY="0c5e6f05-fb7c-4754-ad92-b46ab0cd30e4"
+          SLUG="${{ needs.publish.outputs.slug }}"
+
+          NEW_POST_URL="${SITE_URL}/blog/${SLUG}.html"
+          SITEMAP_URL="${SITE_URL}/sitemap.xml"
+          BLOG_URL="${SITE_URL}/blog.html"
+
+          echo "Submitting URLs to IndexNow..."
+          echo "  Post: ${NEW_POST_URL}"
+          echo "  Blog: ${BLOG_URL}"
+          echo "  Sitemap: ${SITEMAP_URL}"
+
+          # Submit to IndexNow (shared across Bing, Yandex, Naver, Seznam.cz)
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"host\": \"www.saabsa.com\",
+              \"key\": \"${INDEXNOW_KEY}\",
+              \"keyLocation\": \"${SITE_URL}/${INDEXNOW_KEY}.txt\",
+              \"urlList\": [
+                \"${NEW_POST_URL}\",
+                \"${BLOG_URL}\",
+                \"${SITEMAP_URL}\"
+              ]
+            }")
+
+          echo "IndexNow response: HTTP ${HTTP_STATUS}"
+
+          if [ "$HTTP_STATUS" -eq 200 ] || [ "$HTTP_STATUS" -eq 202 ]; then
+            echo "IndexNow submission successful!"
+          else
+            echo "IndexNow submission returned unexpected status (non-fatal)."
+          fi
+
+      - name: Ping Bing with updated sitemap
+        run: |
+          echo "Pinging Bing with sitemap..."
+          curl -s "https://www.bing.com/ping?sitemap=https://www.saabsa.com/sitemap.xml" || true
+          echo "Done."
+
+      - name: Google Indexing API (if configured)
+        if: ${{ secrets.GOOGLE_INDEXING_KEY != '' }}
+        env:
+          GOOGLE_INDEXING_KEY: ${{ secrets.GOOGLE_INDEXING_KEY }}
+        run: |
+          SLUG="${{ needs.publish.outputs.slug }}"
+          NEW_POST_URL="https://www.saabsa.com/blog/${SLUG}.html"
+          node scripts/notify-google.js "${NEW_POST_URL}" URL_UPDATED
