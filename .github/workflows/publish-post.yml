@@ -79,6 +79,7 @@ jobs:
       pages: write
       id-token: write
     uses: ./.github/workflows/static.yml
+    secrets: inherit
 
   # Notify search engines about the new post via IndexNow (Bing, Yandex, etc.)
   # and ping Google/Bing with the updated sitemap.
@@ -86,6 +87,8 @@ jobs:
     needs: [publish, deploy]
     if: needs.publish.outputs.published == 'true'
     runs-on: ubuntu-latest
+    env:
+      GOOGLE_INDEXING_KEY: ${{ secrets.GOOGLE_INDEXING_KEY }}
     steps:
       - name: Checkout (for Google Indexing script)
         uses: actions/checkout@v4
@@ -142,9 +145,7 @@ jobs:
           echo "Done."
 
       - name: Google Indexing API (if configured)
-        if: ${{ secrets.GOOGLE_INDEXING_KEY != '' }}
-        env:
-          GOOGLE_INDEXING_KEY: ${{ secrets.GOOGLE_INDEXING_KEY }}
+        if: env.GOOGLE_INDEXING_KEY != ''
         run: |
           SLUG="${{ needs.publish.outputs.slug }}"
           NEW_POST_URL="https://www.saabsa.com/blog/${SLUG}.html"
