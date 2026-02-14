@@ -41,7 +41,8 @@ jobs:
           node scripts/build-blog.js
       - name: Build Tailwind CSS (replace CDN with optimized CSS)
         run: |
-          npm install --no-save tailwindcss
+          npm install --no-save tailwindcss@3
+          mkdir -p styles
           npx tailwindcss -c tailwind.config.js -i styles/input.css -o styles/tailwind.min.css --minify
           echo "Built Tailwind CSS: $(wc -c < styles/tailwind.min.css) bytes"
           # Replace CDN script tag with CSS link in all HTML files
