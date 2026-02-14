@@ -82,9 +82,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Fonts - Optimized with font-display: swap and reduced weights, loaded asynchronously -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"></noscript>
+    <!-- Fonts - display=optional prevents CLS (uses cached font on repeat visits, fallback on first) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=optional" rel="stylesheet">
     
     <!-- Critical CSS for above-the-fold content -->
     <style>
@@ -104,8 +103,8 @@
         .hero-gradient{background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%)}
     </style>
     
-    <!-- Tailwind CSS CDN - Deferred -->
-    <script src="https://cdn.tailwindcss.com" defer></script>
+    <!-- Tailwind CSS CDN - Must be render-blocking to prevent CLS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
         * {
