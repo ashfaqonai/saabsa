@@ -38,6 +38,17 @@ function escapeAttr(str) {
     return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+/** Decode HTML entities — handles bodyHtml that arrives pre-escaped */
+function unescapeHtml(str) {
+    if (!str) return '';
+    return str
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'");
+}
+
 function formatDate(dateStr) {
     if (!dateStr) return '';
     const months = [
@@ -207,7 +218,7 @@ function readPosts() {
                     category: data.publishCategory || data.category || 'General',
                     excerpt: data.excerpt || '',
                     slug: data.slug || file.replace(/^\d{4}-\d{2}-\d{2}[_-]/, '').replace(/\.json$/, ''),
-                    bodyHtml: data.bodyHtml || '',
+                    bodyHtml: unescapeHtml(data.bodyHtml || ''),
                     imageKeyword: data.imageKeyword || '',
                     imageUrl: data.featuredImageUrl || '',
                     sourceFile: file
