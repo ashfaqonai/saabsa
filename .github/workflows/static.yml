@@ -40,7 +40,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Build blog (generate static pages, posts.json, sitemap)
+      - name: Build blog (generate pages, blog index, posts.json, sitemap)
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
         run: |

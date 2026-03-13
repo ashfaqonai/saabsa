@@ -1,25 +1,389 @@
 {
   "posts": [
     {
+      "title": "How Predictive Analytics Helps Reduce Hospital Readmissions",
+      "date": "2026-03-12",
+      "category": "Technology",
+      "excerpt": "How Predictive Analytics Helps Reduce Hospital Readmissions—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-predictive-analytics-helps-reduce-hospital-readmissions",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How Large Language Models Are Improving Healthcare Workflows",
+      "date": "2026-03-11",
+      "category": "Technology",
+      "excerpt": "How Large Language Models Are Improving Healthcare Workflows—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-large-language-models-are-improving-healthcare-workflows",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How Healthcare Organizations Can Leverage Data Lakes",
+      "date": "2026-03-10",
+      "category": "Technology",
+      "excerpt": "How Healthcare Organizations Can Leverage Data Lakes—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-healthcare-organizations-can-leverage-data-lakes",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How Data Engineering Supports Better Patient Outcomes",
+      "date": "2026-03-09",
+      "category": "Technology",
+      "excerpt": "How Data Engineering Supports Better Patient Outcomes—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-data-engineering-supports-better-patient-outcomes",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How Automation Reduces Front‑Desk Burden in Healthcare",
+      "date": "2026-03-08",
+      "category": "Technology",
+      "excerpt": "How Automation Reduces Front‑Desk Burden in Healthcare—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-automation-reduces-front-desk-burden-in-healthcare",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How Automated Reminders Reduce Missed Appointments by 40%",
+      "date": "2026-03-07",
+      "category": "Technology",
+      "excerpt": "How Automated Reminders Reduce Missed Appointments by 40%—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-automated-reminders-reduce-missed-appointments-by-40",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How APIs Improve Clinic Operations and Data Flow",
+      "date": "2026-03-06",
+      "category": "Technology",
+      "excerpt": "How APIs Improve Clinic Operations and Data Flow—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-apis-improve-clinic-operations-and-data-flow",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How AI Is Transforming Healthcare in 2026",
+      "date": "2026-03-05",
+      "category": "Technology",
+      "excerpt": "How AI Is Transforming Healthcare in 2026—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-ai-is-transforming-healthcare-in-2026",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How AI Improves Clinical Documentation Without Burdening Providers",
+      "date": "2026-03-04",
+      "category": "Technology",
+      "excerpt": "How AI Improves Clinical Documentation Without Burdening Providers—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-ai-improves-clinical-documentation-without-burdening-providers",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How AI Helps Prevent Burnout in Healthcare Professionals",
+      "date": "2026-03-03",
+      "category": "Technology",
+      "excerpt": "How AI Helps Prevent Burnout in Healthcare Professionals—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-ai-helps-prevent-burnout-in-healthcare-professionals",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How AI Enhances Healthcare Reporting & KPI Tracking",
+      "date": "2026-03-02",
+      "category": "Technology",
+      "excerpt": "How AI Enhances Healthcare Reporting & KPI Tracking—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-ai-enhances-healthcare-reporting---kpi-tracking",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "How Advanced Analytics Improve Hospital Decision‑Making",
+      "date": "2026-03-01",
+      "category": "Technology",
+      "excerpt": "How Advanced Analytics Improve Hospital Decision‑Making—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "how-advanced-analytics-improve-hospital-decision-making",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "FHIR + AI: Why Interoperability Matters More Than Ever",
+      "date": "2026-02-28",
+      "category": "Technology",
+      "excerpt": "FHIR + AI: Why Interoperability Matters More Than Ever—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "fhir---ai--why-interoperability-matters-more-than-ever",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "ETL Pipelines for Healthcare: Best Practices",
+      "date": "2026-02-27",
+      "category": "Technology",
+      "excerpt": "ETL Pipelines for Healthcare: Best Practices—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "etl-pipelines-for-healthcare--best-practices",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Ethical AI in Healthcare: What Providers Must Know in 2026",
+      "date": "2026-02-26",
+      "category": "Technology",
+      "excerpt": "Ethical AI in Healthcare: What Providers Must Know in 2026—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "ethical-ai-in-healthcare--what-providers-must-know-in-2026",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "End-to-End Automation for Specialty Clinics: What’s Possible?",
+      "date": "2026-02-25",
+      "category": "Technology",
+      "excerpt": "End-to-End Automation for Specialty Clinics: What’s Possible?—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "end-to-end-automation-for-specialty-clinics--what-s-possible",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Cloud Security Must‑Haves for Healthcare Apps",
+      "date": "2026-02-24",
+      "category": "Technology",
+      "excerpt": "Cloud Security Must‑Haves for Healthcare Apps—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "cloud-security-must-haves-for-healthcare-apps",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Cloud Migration for Healthcare: Step-by-Step Guide",
+      "date": "2026-02-23",
+      "category": "Technology",
+      "excerpt": "Cloud Migration for Healthcare: Step-by-Step Guide—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "cloud-migration-for-healthcare--step-by-step-guide",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Building Real-Time Dashboards for Clinic Operations",
+      "date": "2026-02-22",
+      "category": "Technology",
+      "excerpt": "Building Real-Time Dashboards for Clinic Operations—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "building-real-time-dashboards-for-clinic-operations",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Building Secure Healthcare Apps: What Developers Must Know",
+      "date": "2026-02-22",
+      "category": "Technology",
+      "excerpt": "Building Secure Healthcare Apps: What Developers Must Know—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "building-secure-healthcare-apps--what-developers-must-know",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Building HIPAA-Compliant Data Pipelines in the Cloud",
+      "date": "2026-02-21",
+      "category": "Technology",
+      "excerpt": "Building HIPAA-Compliant Data Pipelines in the Cloud—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "building-hipaa-compliant-data-pipelines-in-the-cloud",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Building FHIR-Compliant Systems from Scratch",
+      "date": "2026-02-20",
+      "category": "Technology",
+      "excerpt": "Building FHIR-Compliant Systems from Scratch—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "building-fhir-compliant-systems-from-scratch",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Best Practices for Designing HIPAA-Compliant Applications",
+      "date": "2026-02-19",
+      "category": "Technology",
+      "excerpt": "Best Practices for Designing HIPAA-Compliant Applications—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "best-practices-for-designing-hipaa-compliant-applications",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Automation for Clinical Coordinators: Save Time Every Day",
+      "date": "2026-02-18",
+      "category": "Technology",
+      "excerpt": "Automation for Clinical Coordinators: Save Time Every Day—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "automation-for-clinical-coordinators--save-time-every-day",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Automating Appointment Scheduling with AI & RPA",
+      "date": "2026-02-17",
+      "category": "Technology",
+      "excerpt": "Automating Appointment Scheduling with AI & RPA—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "automating-appointment-scheduling-with-ai---rpa",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "Automated Prior Authorization: Faster, Better, Smarter",
+      "date": "2026-02-16",
+      "category": "Technology",
+      "excerpt": "Automated Prior Authorization: Faster, Better, Smarter—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "automated-prior-authorization--faster--better--smarter",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "AI vs Manual Review: Why Automation Wins in Clinical Operations",
+      "date": "2026-02-15",
+      "category": "Technology",
+      "excerpt": "AI vs Manual Review: Why Automation Wins in Clinical Operations—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "ai-vs-manual-review--why-automation-wins-in-clinical-operations",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "AI-Driven Quality Measures: A Better Way to Track Healthcare Performance",
+      "date": "2026-02-14",
+      "category": "Technology",
+      "excerpt": "AI-Driven Quality Measures: A Better Way to Track Healthcare Performance—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "ai-driven-quality-measures--a-better-way-to-track-healthcare-performance",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "AI for Revenue Cycle Management: Automated Coding & Claims Processing",
+      "date": "2026-02-14",
+      "category": "Technology",
+      "excerpt": "AI for Revenue Cycle Management: Automated Coding & Claims Processing—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "ai-for-revenue-cycle-management--automated-coding---claims-processing",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "AI in Remote Patient Monitoring: The Next Frontier",
+      "date": "2026-02-14",
+      "category": "Technology",
+      "excerpt": "AI in Remote Patient Monitoring: The Next Frontier—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "ai-in-remote-patient-monitoring--the-next-frontier",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "AI-Powered Triage Systems for Modern Clinics",
+      "date": "2026-02-14",
+      "category": "Technology",
+      "excerpt": "AI-Powered Triage Systems for Modern Clinics—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "ai-powered-triage-systems-for-modern-clinics",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
+      "title": "AI Tools That Improve Patient Engagement and Communication",
+      "date": "2026-02-14",
+      "category": "Technology",
+      "excerpt": "AI Tools That Improve Patient Engagement and Communication—a concise guide for healthcare leaders to understand impact, quick wins, and implementation tips.",
+      "slug": "ai-tools-that-improve-patient-engagement-and-communication",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
+    },
+    {
       "title": "AI in Healthcare 2026",
       "date": "2026-02-13",
       "category": "Technology",
       "excerpt": "A concise guide to practical AI improvements in clinical operations.",
-      "slug": "ai-in-healthcare-2026"
+      "slug": "ai-in-healthcare-2026",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
     },
     {
       "title": "How Saabsa Solutions Is Redefining Custom Software Development with AI",
       "date": "2025-12-11",
       "category": "Technology",
       "excerpt": "Saabsa Solutions is transforming custom software development by integrating Artificial Intelligence (AI) across the software lifecycle, delivering faster, smarter, and more reliable solutions.",
-      "slug": "how-saabsa-solutions-is-redefining-custom-software-development-with-ai"
+      "slug": "how-saabsa-solutions-is-redefining-custom-software-development-with-ai",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
     },
     {
       "title": "Welcome to the Saabsa Solutions Blog",
       "date": "2025-01-15",
       "category": "Company News",
       "excerpt": "Welcome to our new blog! We'll be sharing insights on healthcare technology, AI software development, and healthcare automation.",
-      "slug": "welcome-to-saabsa-solutions-blog"
+      "slug": "welcome-to-saabsa-solutions-blog",
+      "imageUrl": "",
+      "photographer": "",
+      "photographerUrl": "",
+      "pexelsUrl": ""
     }
   ]
 }

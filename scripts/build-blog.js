@@ -20,6 +20,7 @@ const { marked } = require('marked');
 const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, '_posts');
 const BLOG_DIR = path.join(ROOT, 'blog');
+const BLOG_INDEX_PATH = path.join(ROOT, 'blog.html');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const SITE_URL = 'https://www.saabsa.com';
 const PEXELS_API_KEY = process.env.PEXELS_API_KEY || '';
@@ -548,6 +549,72 @@ function generatePostsJson(posts) {
 }
 
 // ---------------------------------------------------------------------------
+// Update blog.html with static, crawlable links
+// ---------------------------------------------------------------------------
+
+function generateBlogListingSection(posts) {
+    const cards = posts.map(post => {
+        const postUrl = `/blog/${post.slug}.html`;
+        const dateText = post.date ? formatDate(post.date) : 'Unknown date';
+        const dateAttr = post.date || '';
+        const excerpt = post.excerpt || post.title;
+
+        return `                <article class="card-hover glass-effect rounded-3xl shadow-xl overflow-hidden">
+                    ${post.imageUrl ? `
+                    <a href="${postUrl}" class="block">
+                        <img src="${escapeAttr(post.imageUrl)}" alt="${escapeAttr(post.title)}" class="w-full h-48 md:h-56 object-cover" loading="lazy" />
+                    </a>` : ''}
+                    <div class="p-8">
+                        <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+                            <time datetime="${dateAttr}">${dateText}</time>
+                            ${post.category ? `<span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">${escapeHtml(post.category)}</span>` : ''}
+                        </div>
+                        <h2 class="text-3xl font-bold mb-4 text-gray-900">
+                            <a href="${postUrl}" class="hover:text-[#0F3D6E] transition-colors">
+                                ${escapeHtml(post.title)}
+                            </a>
+                        </h2>
+                        <p class="text-lg text-gray-600 mb-4">${escapeHtml(excerpt)}</p>
+                        <a href="${postUrl}" class="inline-block text-[#0F3D6E] font-semibold hover:underline">
+                            Read More →
+                        </a>
+                    </div>
+                </article>`;
+    }).join('\n\n');
+
+    return `    <!-- Blog Posts Section -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <div id="blogPosts" class="space-y-8">
+${cards || `                <div class="text-center py-12">
+                    <p class="text-gray-600 text-lg mb-4">No blog posts yet. Check back soon!</p>
+                    <p class="text-gray-500 text-sm">New insights on healthcare technology coming weekly.</p>
+                </div>`}
+            </div>
+        </div>
+    </section>`;
+}
+
+function updateBlogIndexPage(posts) {
+    if (!fs.existsSync(BLOG_INDEX_PATH)) {
+        console.warn('  ! blog.html not found; skipping static listing update');
+        return;
+    }
+
+    const html = fs.readFileSync(BLOG_INDEX_PATH, 'utf8');
+    const replacementSection = generateBlogListingSection(posts);
+    const pattern = /<!-- Blog Posts Section -->[\s\S]*?<\/section>/;
+
+    if (!pattern.test(html)) {
+        console.warn('  ! Could not find blog posts section in blog.html; skipping update');
+        return;
+    }
+
+    const updated = html.replace(pattern, replacementSection);
+    fs.writeFileSync(BLOG_INDEX_PATH, updated, 'utf8');
+}
+
+// ---------------------------------------------------------------------------
 // Generate sitemap.xml
 // ---------------------------------------------------------------------------
 
@@ -615,6 +682,10 @@ async function main() {
     // Generate posts.json
     generatePostsJson(posts);
     console.log(`  + _posts/posts.json  (${posts.length} entries)`);
+
+    // Update blog.html with static list (SEO/crawl fallback)
+    updateBlogIndexPage(posts);
+    console.log(`  + blog.html (static blog listing)`);
 
     // Generate sitemap
     generateSitemap(posts);
