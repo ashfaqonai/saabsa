@@ -407,7 +407,7 @@ function generatePostHtml(post) {
                     <a href="/index.html#about" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">About</a>
                     <a href="/services.html" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Services</a>
                     <a href="/blog.html" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Blog</a>
-                    <a href="/index.html#patientree" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Patientree AI</a>
+                    <a href="/index.html#products" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Products</a>
                     <a href="/index.html#contact" class="bg-gradient-to-r from-[#0F3D6E] to-[#F26A21] text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
                         Get Started
                     </a>
@@ -481,7 +481,7 @@ function generatePostHtml(post) {
                     </div>
                     <p class="text-sm font-semibold text-white mb-2">Transforming Ideas into Intelligent Solutions</p>
                     <p class="text-sm text-gray-400 leading-relaxed">
-                        <strong>Saabsa Solutions</strong> is an emerging tech company focused on AI and software for healthcare.
+                        <strong>Saabsa Solutions</strong> builds AI-powered products and custom software for organizations worldwide.
                     </p>
                 </div>
                 <div>
@@ -494,11 +494,12 @@ function generatePostHtml(post) {
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-white font-bold mb-4">Resources</h3>
+                    <h3 class="text-white font-bold mb-4">Products</h3>
                     <ul class="space-y-2 text-sm">
                         <li><a href="/blog.html" class="hover:text-white transition-colors">Blog</a></li>
                         <li><a href="/index.html#patientree" class="hover:text-white transition-colors">Patientree AI</a></li>
                         <li><a href="https://www.patientree.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Visit Patientree</a></li>
+                        <li><a href="/index.html#dataxpipe" class="hover:text-white transition-colors">DataXPipe</a></li>
                     </ul>
                 </div>
                 <div>
@@ -588,7 +589,7 @@ function generateBlogListingSection(posts) {
             <div id="blogPosts" class="space-y-8">
 ${cards || `                <div class="text-center py-12">
                     <p class="text-gray-600 text-lg mb-4">No blog posts yet. Check back soon!</p>
-                    <p class="text-gray-500 text-sm">New insights on healthcare technology coming weekly.</p>
+                    <p class="text-gray-500 text-sm">New insights on technology, AI, and data engineering coming weekly.</p>
                 </div>`}
             </div>
         </div>
