@@ -499,7 +499,8 @@ function generatePostHtml(post) {
                         <li><a href="/blog.html" class="hover:text-white transition-colors">Blog</a></li>
                         <li><a href="/index.html#patientree" class="hover:text-white transition-colors">Patientree AI</a></li>
                         <li><a href="https://www.patientree.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Visit Patientree</a></li>
-                        <li><a href="/index.html#dataxpipe" class="hover:text-white transition-colors">DataXPipe</a></li>
+                        <li><a href="https://www.dataxpipe.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">DataXPipe</a></li>
+                        <li><a href="https://leasexit.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Lease Exit</a></li>
                     </ul>
                 </div>
                 <div>
