@@ -1,0 +1,7 @@
+<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="leasexit-icon-title">
+  <title id="leasexit-icon-title">Lease Exit</title>
+  <rect width="40" height="40" rx="10" fill="#10B981"/>
+  <path d="M10 10h11v20H10V10z" fill="white" fill-opacity="0.95"/>
+  <path d="M21 10h9l3 10-3 10h-9V10z" fill="#059669"/>
+  <circle cx="27" cy="20" r="2.25" fill="white"/>
+</svg>
