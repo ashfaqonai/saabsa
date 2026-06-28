@@ -144,7 +144,7 @@ function renderFeaturedPost(post) {
                     ${featuredImageHtml(post)}
                 </a>
                 <div class="blog-featured-body">
-                    <h2 class="blog-featured-title"><a href="${postUrl}">${escapeHtml(post.title)}</a></h2>
+                    <h2 class="blog-featured-title">${escapeHtml(post.title)}</h2>
                     <p class="blog-featured-excerpt">${escapeHtml(excerpt)}</p>
                     <a href="${postUrl}" class="blog-read-more">Read more</a>
                 </div>

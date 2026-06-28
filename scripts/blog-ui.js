@@ -27,7 +27,7 @@
             '<article id="blogFeatured" class="blog-featured">' +
             '<a href="' + url + '" class="blog-featured-image">' + imgHtml + '</a>' +
             '<div class="blog-featured-body">' +
-            '<h2 class="blog-featured-title"><a href="' + url + '">' + escapeHtml(post.title) + '</a></h2>' +
+            '<h2 class="blog-featured-title">' + escapeHtml(post.title) + '</h2>' +
             '<p class="blog-featured-excerpt">' + escapeHtml(post.excerpt || post.title) + '</p>' +
             '<a href="' + url + '" class="blog-read-more">Read more</a>' +
             '</div></article>'
