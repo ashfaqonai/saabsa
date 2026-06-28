@@ -17,6 +17,23 @@
         return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
+    function renderFeatured(post) {
+        var url = '/blog/' + post.slug + '.html';
+        var imgUrl = post.imageUrl || post.imageMedium || '';
+        var imgHtml = imgUrl
+            ? '<img src="' + escapeHtml(imgUrl) + '" alt="' + escapeHtml(post.title) + '" loading="eager" />'
+            : '<div class="blog-featured-image-placeholder" aria-hidden="true"></div>';
+        return (
+            '<article id="blogFeatured" class="blog-featured">' +
+            '<a href="' + url + '" class="blog-featured-image">' + imgHtml + '</a>' +
+            '<div class="blog-featured-body">' +
+            '<h2 class="blog-featured-title"><a href="' + url + '">' + escapeHtml(post.title) + '</a></h2>' +
+            '<p class="blog-featured-excerpt">' + escapeHtml(post.excerpt || post.title) + '</p>' +
+            '<a href="' + url + '" class="blog-read-more">Read more</a>' +
+            '</div></article>'
+        );
+    }
+
     function renderCard(post) {
         var url = '/blog/' + post.slug + '.html';
         var category = post.category || 'General';
@@ -86,16 +103,19 @@
         if (!posts.length) return;
         posts.sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
 
+        var featured = posts[0];
+        var rest = posts.slice(1);
         var categories = [];
         posts.forEach(function (p) {
             if (p.category && categories.indexOf(p.category) === -1) categories.push(p.category);
         });
         categories.sort();
 
-        var gridHtml = posts.map(renderCard).join('');
+        var gridHtml = rest.map(renderCard).join('');
         var listing = document.getElementById('blogListing');
         if (listing) {
             listing.innerHTML =
+                renderFeatured(featured) +
                 renderToolbar(categories) +
                 '<div id="blogPosts" class="blog-grid">' + gridHtml + '</div>' +
                 '<p id="blogEmpty" class="blog-empty hidden" role="status">No articles found matching your search.</p>';
