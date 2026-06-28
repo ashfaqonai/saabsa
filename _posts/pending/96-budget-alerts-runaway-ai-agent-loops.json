@@ -1,0 +1,9 @@
+{
+  "title": "Budget Alerts for Runaway AI Agent Loops",
+  "slug": "budget-alerts-runaway-ai-agent-loops",
+  "excerpt": "Agentic coding workflows can burn tokens overnight. Set thresholds, anomaly detection, and escalation paths before the invoice arrives.",
+  "category": "Developer Tools",
+  "bodyHtml": "<p>A single misconfigured agent—or an enthusiastic intern leaving a loop running—can turn a predictable $4K monthly AI bill into a five-figure surprise. Traditional cloud alerts don't cover IDE-embedded tools or personal API keys rolled into org billing.</p>\n<h2>Alert types worth enabling</h2>\n<ul>\n  <li><strong>Monthly budget thresholds</strong> at 70%, 90%, and 100% with Slack or email routing</li>\n  <li><strong>Daily spike detection</strong> when spend exceeds 2× trailing seven-day average</li>\n  <li><strong>Per-developer caps</strong> for trial accounts or contractors</li>\n  <li><strong>Model-specific alerts</strong> when premium model share crosses a policy limit</li>\n</ul>\n<h2>Response playbook</h2>\n<ol>\n  <li>Identify the team/repo driving the spike within minutes—not at month close</li>\n  <li>Pause or throttle non-production API keys if policy allows</li>\n  <li>Coach on agent loop patterns (retry limits, max iterations)</li>\n  <li>Document the incident for the next vendor negotiation</li>\n</ol>\n<h2>ForgeMeter smart alerts</h2>\n<p><a href=\"https://forgemeter.com/\">ForgeMeter</a> includes budget thresholds, usage spikes, and anomaly detection designed for AI development stacks—24/7 monitoring without intercepting developer requests. Team and Pro plans add custom alert routing and repo-level drill-down.</p>",
+  "imageKeyword": "server monitoring alert",
+  "product": "forgemeter"
+}

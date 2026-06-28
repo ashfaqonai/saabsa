@@ -1,0 +1,9 @@
+{
+  "title": "Tracking Cursor, Copilot, and Claude Costs in One Place",
+  "slug": "tracking-cursor-copilot-claude-costs-one-place",
+  "excerpt": "Running three AI coding tools means three bills and zero shared context. Here's how to consolidate spend visibility without slowing developers down.",
+  "category": "Developer Tools",
+  "bodyHtml": "<p>Enterprise engineering teams rarely standardize on a single AI assistant. Cursor wins for power users, Copilot ships with GitHub Enterprise, and Claude Code handles long-context refactors. Each tool reports usage differently—if it reports at all.</p>\n<h2>Why spreadsheets fail</h2>\n<p>Exporting CSVs from three consoles every month creates stale data and manual reconciliation errors. By the time finance closes the books, engineering has already changed default models or onboarded ten new hires.</p>\n<h2>A unified integration model</h2>\n<p>Look for platforms that pull from:</p>\n<ul>\n  <li><strong>Cursor Enterprise API</strong> for seat and usage metrics</li>\n  <li><strong>GitHub Copilot Metrics API</strong> for acceptance rates and active users</li>\n  <li><strong>OpenAI and Anthropic billing APIs</strong> for token spend tied to org accounts</li>\n</ul>\n<p>Read-only OAuth and billing scopes are enough—no need to inspect diffs or file contents.</p>\n<h2>Questions one dashboard should answer</h2>\n<ol>\n  <li>Which team drove the spike last Tuesday?</li>\n  <li>Are we paying for Copilot seats nobody uses?</li>\n  <li>Would routing code reviews to a smaller model save meaningful dollars?</li>\n</ol>\n<h2>ForgeMeter brings it together</h2>\n<p><a href=\"https://forgemeter.com/\">ForgeMeter</a> connects Cursor, Copilot, and Claude via official APIs and surfaces daily spend by provider, active developers, and budget utilization—with AI-written summaries that highlight waste and savings opportunities.</p>",
+  "imageKeyword": "developer team analytics",
+  "product": "forgemeter"
+}

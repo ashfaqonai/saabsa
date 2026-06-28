@@ -1,0 +1,9 @@
+{
+  "title": "Model Routing Strategies to Cut AI Dev Tool Costs",
+  "slug": "model-routing-cut-ai-dev-tool-costs",
+  "excerpt": "Not every task needs the most capable model. Practical routing rules that reduce AI coding spend without hurting developer velocity.",
+  "category": "Developer Tools",
+  "bodyHtml": "<p>ForgeMeter customers often find backend teams account for the largest share of AI spend—not because they code more, but because they default to the most capable (and expensive) models for every prompt.</p>\n<h2>Match model to task</h2>\n<table>\n  <tr><th>Task</th><th>Typical routing</th></tr>\n  <tr><td>Boilerplate generation</td><td>Economy / fast model</td></tr>\n  <tr><td>Code review comments</td><td>Mid-tier model</td></tr>\n  <tr><td>Cross-repo refactors</td><td>Premium model with context limits</td></tr>\n  <tr><td>Test generation</td><td>Economy model with lint feedback</td></tr>\n</table>\n<h2>Operationalize routing</h2>\n<ol>\n  <li>Baseline spend by team and model for two weeks</li>\n  <li>Identify top three expensive workflows (reviews, tests, docs)</li>\n  <li>Pilot down-tier models with quality spot-checks</li>\n  <li>Document defaults in team playbooks—not ad hoc per developer</li>\n</ol>\n<h2>Let data suggest the swap</h2>\n<p>Generic advice helps; <strong>your</strong> data closes the loop. ForgeMeter's AI summaries call out concrete swaps—e.g., routing code reviews to a haiku-class model to save ~$180/month for a single squad.</p>\n<p>Explore recommendations on the <a href=\"https://forgemeter.com/\">ForgeMeter live demo</a> or connect your org for personalized insights.</p>",
+  "imageKeyword": "cloud cost optimization",
+  "product": "forgemeter"
+}

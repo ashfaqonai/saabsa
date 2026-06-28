@@ -1,0 +1,9 @@
+{
+  "title": "ForgeMeter: Datadog for Your AI Development Stack",
+  "slug": "forgemeter-datadog-ai-development-stack",
+  "excerpt": "Enterprises instrument production with Datadog—but AI dev tools run blind. ForgeMeter is the observability layer engineering finance has been missing.",
+  "category": "Developer Tools",
+  "bodyHtml": "<p>Datadog tells you when API latency spikes. It doesn't tell you that your backend team routed every code review through the most expensive Claude model last week. AI-assisted development needs its own observability category.</p>\n<h2>Parallels that help buyers decide</h2>\n<ul>\n  <li><strong>Connect in minutes</strong> via official APIs—like installing a Datadog integration</li>\n  <li><strong>Unified dashboard</strong> instead of five vendor consoles</li>\n  <li><strong>Alerts on anomalies</strong> before they become invoices</li>\n  <li><strong>AI summaries</strong> that translate metrics for non-engineering stakeholders</li>\n</ul>\n<h2>What stays different</h2>\n<p>ForgeMeter does not store source code or intercept IDE traffic. It consumes billing and usage metadata—the minimum needed for cost and adoption signals—keeping security reviews lightweight.</p>\n<h2>Who it's for</h2>\n<p>CTOs and VPs at 10–200 engineer orgs running multiple AI tools; platform teams tasked with FinOps for developer experience; and design partners shaping enterprise governance features.</p>\n<h2>Explore the demo</h2>\n<p>Visit <a href=\"https://forgemeter.com/\">forgemeter.com</a> for a live demo showing monthly spend, token volume, active developers, and AI-generated savings recommendations—no credit card required.</p>",
+  "imageKeyword": "data center monitoring",
+  "product": "forgemeter"
+}

@@ -1,0 +1,9 @@
+{
+  "title": "How ForgeMeter Connects via Official APIs Without Intercepting Code",
+  "slug": "forgemeter-official-api-integrations-no-interception",
+  "excerpt": "Security teams block proxies; developers hate friction. ForgeMeter's read-only API model delivers spend visibility without touching source code.",
+  "category": "Developer Tools",
+  "bodyHtml": "<p>Many \"AI analytics\" products ask for network proxies or IDE plugins that inspect every prompt. Security reviews stall; developers disable them. ForgeMeter took a different path: <strong>official vendor APIs only</strong>.</p>\n<h2>What ForgeMeter accesses</h2>\n<ul>\n  <li>Cursor Enterprise usage and billing metrics</li>\n  <li>GitHub Copilot Metrics API aggregates</li>\n  <li>OpenAI and Anthropic organization billing and usage APIs</li>\n</ul>\n<h2>What ForgeMeter does not access</h2>\n<ul>\n  <li>Source code, diffs, or file contents</li>\n  <li>Prompt text or model responses</li>\n  <li>Write scopes on production systems</li>\n</ul>\n<h2>Why this matters for rollout</h2>\n<p>Read-only OAuth and billing tokens typically skip lengthy security exceptions. Most teams connect in under five minutes—no agents to install, no changes to developer laptops.</p>\n<h2>Deployment options</h2>\n<p>SaaS is the default; enterprise buyers evaluating data residency should discuss requirements with the ForgeMeter team via <a href=\"https://forgemeter.com/\">forgemeter.com</a>.</p>\n<p>ForgeMeter is part of the Saabsa Solutions product portfolio alongside Patientree AI, DataXPipe, and Lease Exit—unified by a security-first approach to production software.</p>",
+  "imageKeyword": "cybersecurity software",
+  "product": "forgemeter"
+}

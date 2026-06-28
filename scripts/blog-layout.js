@@ -94,6 +94,7 @@ function blogFooter() {
                         <li><a href="/blog.html">Blog</a></li>
                         <li><a href="/index.html#patientree">Patientree AI</a></li>
                         <li><a href="https://www.dataxpipe.com/" target="_blank" rel="noopener noreferrer">DataXPipe</a></li>
+                        <li><a href="https://forgemeter.com/" target="_blank" rel="noopener noreferrer">ForgeMeter</a></li>
                         <li><a href="https://leasexit.com/" target="_blank" rel="noopener noreferrer">Lease Exit</a></li>
                     </ul>
                 </div>
@@ -120,6 +121,7 @@ function blogResourcesSection() {
                 <div class="blog-resource-links">
                     <a href="/index.html#patientree">Patientree AI</a>
                     <a href="https://www.dataxpipe.com/" target="_blank" rel="noopener noreferrer">DataXPipe</a>
+                    <a href="https://forgemeter.com/" target="_blank" rel="noopener noreferrer">ForgeMeter</a>
                     <a href="https://leasexit.com/" target="_blank" rel="noopener noreferrer">Lease Exit</a>
                     <a href="/services.html">Services</a>
                     <a href="/contact.html">Contact</a>

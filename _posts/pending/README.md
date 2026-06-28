@@ -1,4 +1,4 @@
-# Scheduled blog posts (90-day queue)
+# Scheduled blog posts (90-day queue + ForgeMeter extension)
 
 These JSON files publish **one per day** via GitHub Actions (`publish-post.yml`).
 
@@ -7,6 +7,7 @@ These JSON files publish **one per day** via GitHub Actions (`publish-post.yml`)
 - **DataXPipe** (Data Engineering) — posts 26–50
 - **Lease Exit** (Consumer Legal Tech) — posts 51–75
 - **Saabsa Solutions** (Company News / AI) — posts 76–90
+- **ForgeMeter** (Developer Tools) + portfolio announcement — posts 91–100
 
 ## How publishing works
 1. Cron runs daily at 16:20 UTC (10:20 AM CST).

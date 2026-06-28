@@ -46,6 +46,11 @@ const POOLS = {
         3862132, 5474296, 325229, 1181317, 590020, 7567443, 256381,
         3861087, 3861086,
     ],
+    engineering: [
+        3861969, 1181676, 3861972, 5474296, 7567443, 7688460, 7688336,
+        3184465, 577585, 669619, 1181244, 265087, 3184290, 6476264,
+        3862132, 325229, 1181317, 256381, 416405, 210607, 803963,
+    ],
 };
 
 const CATEGORY_POOL = {
@@ -55,6 +60,7 @@ const CATEGORY_POOL = {
     'Consumer Legal Tech': 'lease',
     'Company News': 'general',
     'AI & Automation': 'general',
+    'Developer Tools': 'engineering',
 };
 
 function uniquePoolIds(poolName) {
@@ -94,7 +100,7 @@ function pexelsCropUrl(photoId, width = 1200, height = 627) {
 
 function poolForPost(post) {
     if (post.product && POOLS[post.product]) {
-        const map = { patientree: 'healthcare', dataxpipe: 'data', leasexit: 'lease', saabsa: 'general', ai: 'general' };
+        const map = { patientree: 'healthcare', dataxpipe: 'data', leasexit: 'lease', forgemeter: 'engineering', saabsa: 'general', ai: 'general' };
         return map[post.product] || 'general';
     }
     return CATEGORY_POOL[post.category] || 'general';

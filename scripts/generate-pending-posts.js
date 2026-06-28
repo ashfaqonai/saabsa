@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Generate 90 scheduled blog posts in _posts/pending/ for daily publishing.
- * Topics cover Patientree AI, DataXPipe, Lease Exit, and Saabsa services.
+ * Topics cover Patientree AI, DataXPipe, ForgeMeter, Lease Exit, and Saabsa services.
  *
  *   node scripts/generate-pending-posts.js
  *   node scripts/generate-pending-posts.js --force   # overwrite existing pending files
@@ -16,6 +16,7 @@ const PRODUCTS = {
     patientree: { name: 'Patientree AI', url: 'https://www.patientree.com', category: 'Healthcare Technology' },
     dataxpipe: { name: 'DataXPipe', url: 'https://www.dataxpipe.com/', category: 'Data Engineering' },
     leasexit: { name: 'Lease Exit', url: 'https://leasexit.com/', category: 'Consumer Legal Tech' },
+    forgemeter: { name: 'ForgeMeter', url: 'https://forgemeter.com/', category: 'Developer Tools' },
     saabsa: { name: 'Saabsa Solutions', url: 'https://www.saabsa.com/contact.html', category: 'Company News' },
     ai: { name: 'Saabsa Solutions', url: 'https://www.saabsa.com/services.html', category: 'AI & Automation' },
 };
@@ -104,13 +105,13 @@ const TOPICS = [
     { title: 'Lease Exit Planning: 90 Days Before You Move', slug: 'lease-exit-planning-90-days-before-move', product: 'leasexit', imageKeyword: 'moving planning calendar', angle: 'a quarter-ahead checklist for a clean exit' },
 
     // Saabsa / cross-product (76–90)
-    { title: 'Building Multi-Product SaaS Platforms: Lessons from Saabsa', slug: 'building-multi-product-saas-lessons-from-saabsa', product: 'saabsa', imageKeyword: 'software product team', angle: 'shipping Patientree, DataXPipe, and Lease Exit from one engineering culture' },
+    { title: 'Building Multi-Product SaaS Platforms: Lessons from Saabsa', slug: 'building-multi-product-saas-lessons-from-saabsa', product: 'saabsa', imageKeyword: 'software product team', angle: 'shipping Patientree, DataXPipe, ForgeMeter, and Lease Exit from one engineering culture' },
     { title: 'How Saabsa Solutions Approaches AI Product Development', slug: 'saabsa-solutions-ai-product-development-approach', product: 'saabsa', imageKeyword: 'AI product development', angle: 'from prototype to production with guardrails' },
     { title: 'Custom Software vs Off-the-Shelf for Growing Businesses', slug: 'custom-software-vs-off-the-shelf-growing-business', product: 'saabsa', imageKeyword: 'business software decision', angle: 'when build beats buy for scaling organizations' },
     { title: 'Choosing a Development Partner for AI-Powered Products', slug: 'choosing-development-partner-ai-products', product: 'saabsa', imageKeyword: 'technology consulting meeting', angle: 'evaluating partners for healthcare, data, and consumer apps' },
     { title: 'From MVP to Enterprise: Scaling SaaS Architecture', slug: 'mvp-to-enterprise-scaling-saas-architecture', product: 'saabsa', imageKeyword: 'cloud architecture diagram', angle: 'architecture patterns that survive growth' },
     { title: 'HIPAA and SOC 2 Controls Shared Across Product Teams', slug: 'hipaa-soc2-shared-controls-product-teams', product: 'saabsa', imageKeyword: 'compliance audit', angle: 'reusing security controls across regulated products' },
-    { title: 'Why Saabsa Built Patientree, DataXPipe, and Lease Exit', slug: 'why-saabsa-built-patientree-dataxpipe-leasexit', product: 'saabsa', imageKeyword: 'technology startup vision', angle: 'the product portfolio strategy behind three distinct markets' },
+    { title: 'Why Saabsa Built Patientree, DataXPipe, ForgeMeter, and Lease Exit', slug: 'why-saabsa-built-patientree-dataxpipe-leasexit', product: 'saabsa', imageKeyword: 'technology startup vision', angle: 'the product portfolio strategy behind four distinct markets' },
     { title: 'Data Engineering Services: When to Build vs Buy Pipelines', slug: 'data-engineering-services-build-vs-buy', product: 'saabsa', imageKeyword: 'data engineering consulting', angle: 'combining DataXPipe with custom engineering engagements' },
     { title: 'AI Consulting ROI: Measuring Outcomes in 90 Days', slug: 'ai-consulting-roi-measuring-90-days', product: 'ai', imageKeyword: 'business analytics ROI', angle: 'short-cycle pilots that prove automation value' },
     { title: 'Cross-Industry Lessons from Healthcare and Legal Tech', slug: 'cross-industry-lessons-healthcare-legal-tech', product: 'saabsa', imageKeyword: 'innovation technology', angle: 'what Patientree and Lease Exit teach shared platform teams' },
@@ -118,13 +119,13 @@ const TOPICS = [
     { title: 'Integrating AI into Existing Business Workflows', slug: 'integrating-ai-existing-business-workflows', product: 'ai', imageKeyword: 'workflow automation office', angle: 'embedding models without disrupting operations' },
     { title: 'Cloud-Native Architecture for New SaaS Products', slug: 'cloud-native-architecture-new-saas-products', product: 'saabsa', imageKeyword: 'cloud native kubernetes', angle: 'foundational choices for reliability and scale' },
     { title: 'Security-First Design for Consumer and B2B Apps', slug: 'security-first-design-consumer-b2b-apps', product: 'saabsa', imageKeyword: 'application security', angle: 'threat modeling across healthcare and consumer legal products' },
-    { title: 'The Future of the Saabsa Solutions Product Portfolio', slug: 'future-saabsa-solutions-product-portfolio', product: 'saabsa', imageKeyword: 'future technology', angle: 'where Patientree, DataXPipe, and Lease Exit are headed next' },
+    { title: 'The Future of the Saabsa Solutions Product Portfolio', slug: 'future-saabsa-solutions-product-portfolio', product: 'saabsa', imageKeyword: 'future technology', angle: 'where Patientree, DataXPipe, ForgeMeter, and Lease Exit are headed next' },
 ];
 
 function buildBodyHtml(topic) {
     const p = PRODUCTS[topic.product];
     const exploreLine = (topic.product === 'saabsa' || topic.product === 'ai')
-        ? `<a href="${p.url}">${p.name}</a> builds Patientree AI, DataXPipe, and Lease Exit, plus custom engineering and AI consulting services.`
+        ? `<a href="${p.url}">${p.name}</a> builds Patientree AI, DataXPipe, ForgeMeter, and Lease Exit, plus custom engineering and AI consulting services.`
         : `<a href="${p.url}">${p.name}</a>, from Saabsa Solutions, helps teams move faster with less guesswork.`;
     return `<p><strong>${topic.title}</strong> explores practical approaches to ${topic.angle}. This guide focuses on measurable outcomes, clear ownership, and tooling that scales in 2026.</p>
 <h2>Why this matters now</h2>

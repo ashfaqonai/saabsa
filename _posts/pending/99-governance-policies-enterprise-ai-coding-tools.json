@@ -1,0 +1,9 @@
+{
+  "title": "Governance Policies for Enterprise AI Coding Tools",
+  "slug": "governance-policies-enterprise-ai-coding-tools",
+  "excerpt": "Allowlists, team budgets, and usage policies turn AI coding tools from shadow IT into managed infrastructure. A practical governance checklist.",
+  "category": "Developer Tools",
+  "bodyHtml": "<p>Procurement approved Copilot. Engineering adopted Cursor. A platform team wired Claude Code for refactors. Without governance, you get duplicate spend, inconsistent data handling, and no lever when usage spikes.</p>\n<h2>Policy areas to define</h2>\n<ul>\n  <li><strong>Approved tools and models</strong> — allowlist by team or data classification</li>\n  <li><strong>Budget envelopes</strong> — monthly caps per team with escalation paths</li>\n  <li><strong>API key management</strong> — org accounts only; no personal keys on production repos</li>\n  <li><strong>Data boundaries</strong> — which repos may use cloud LLMs vs. air-gapped alternatives</li>\n  <li><strong>Audit and reporting</strong> — monthly exports for finance and security review</li>\n</ul>\n<h2>Enforce with visibility first</h2>\n<p>Policies fail when teams can't see their own usage. Give managers dashboards before mandates—then align caps to observed baselines plus growth headroom.</p>\n<h2>ForgeMeter governance features</h2>\n<p><a href=\"https://forgemeter.com/\">ForgeMeter</a> supports per-team budgets, model allowlists, and usage policies on Team and Pro tiers—enterprise-ready controls built for engineering-led organizations. Connect via official APIs in under five minutes.</p>",
+  "imageKeyword": "corporate compliance security",
+  "product": "forgemeter"
+}
