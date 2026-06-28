@@ -22,7 +22,7 @@ const {
     generateBlogListingBlock,
     formatDateShort,
 } = require('./blog-layout');
-const { resolvePostImage, persistPostImage } = require('./blog-images');
+const { resolvePostImage, persistPostImage, reassignUniqueImages, poolForPost } = require('./blog-images');
 
 const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, '_posts');
@@ -143,11 +143,16 @@ function fetchPexelsImage(keyword) {
  */
 async function enrichPostsWithImages(posts) {
     console.log('  Resolving blog images...');
+    const usedByPool = {};
 
     for (const post of posts) {
         const existing = (post.imageUrl || '').trim();
         if (existing) {
             if (!post.imageMedium) post.imageMedium = existing;
+            const poolName = poolForPost(post);
+            if (!usedByPool[poolName]) usedByPool[poolName] = new Set();
+            const match = existing.match(/photos\/(\d+)/);
+            if (match) usedByPool[poolName].add(Number(match[1]));
             console.log(`    ✓ ${post.slug} (already has image)`);
             continue;
         }
@@ -167,13 +172,15 @@ async function enrichPostsWithImages(posts) {
             }
         }
 
-        const fallback = resolvePostImage(post);
+        const poolName = poolForPost(post);
+        if (!usedByPool[poolName]) usedByPool[poolName] = new Set();
+        const fallback = resolvePostImage(post, usedByPool[poolName]);
         post.imageUrl = fallback.imageUrl;
         post.imageMedium = fallback.imageMedium;
         if (persistPostImage(post)) {
-            console.log(`    ↳ ${post.slug} (fallback image, saved to source)`);
+            console.log(`    ↳ ${post.slug} (unique fallback, saved to source)`);
         } else {
-            console.log(`    ↳ ${post.slug} (fallback image)`);
+            console.log(`    ↳ ${post.slug} (unique fallback)`);
         }
     }
     console.log('');

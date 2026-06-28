@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-/** One-shot: add Pexels CDN imageUrl to all posts missing images, then rebuild. */
+/** Reassign unique Pexels images to all posts, then rebuild the site. */
 const { execSync } = require('child_process');
-const { backfillAllPostFiles } = require('./blog-images');
+const { reassignUniqueImages } = require('./blog-images');
 
-const n = backfillAllPostFiles();
-console.log(`Backfilled ${n} post(s). Running build-blog.js...\n`);
+const { updated, total } = reassignUniqueImages({ force: true });
+console.log(`Reassigned unique images for ${updated}/${total} post(s).\n`);
 execSync('node scripts/build-blog.js', { stdio: 'inherit', cwd: require('path').join(__dirname, '..') });

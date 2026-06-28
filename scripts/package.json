@@ -6,7 +6,8 @@
     "build": "node build-blog.js",
     "publish:pending": "node publish-pending.js",
     "generate:pending": "node generate-pending-posts.js",
-    "backfill:images": "node backfill-images.js"
+    "backfill:images": "node backfill-images.js",
+    "reassign:images": "node blog-images.js --reassign"
   },
   "dependencies": {
     "marked": "^15.0.0"
