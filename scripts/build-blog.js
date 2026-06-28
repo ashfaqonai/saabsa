@@ -22,6 +22,7 @@ const {
     generateBlogListingBlock,
     formatDateShort,
 } = require('./blog-layout');
+const { resolvePostImage, persistPostImage } = require('./blog-images');
 
 const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, '_posts');
@@ -137,43 +138,43 @@ function fetchPexelsImage(keyword) {
 }
 
 /**
- * Fetch Pexels images for all posts that need them.
- * Respects existing featuredImageUrl and skips if no API key is set.
+ * Resolve hero images: Pexels API when key is set, else curated CDN fallbacks.
+ * Persists imageUrl back to source JSON so images survive rebuilds without API key.
  */
 async function enrichPostsWithImages(posts) {
-    if (!PEXELS_API_KEY) {
-        console.log('  PEXELS_API_KEY not set — skipping image fetch.\n');
-        return;
-    }
+    console.log('  Resolving blog images...');
 
-    console.log('  Fetching images from Pexels...');
     for (const post of posts) {
-        // If the post already has a manual image URL, skip Pexels
-        if (post.imageUrl) {
+        const existing = (post.imageUrl || '').trim();
+        if (existing) {
+            if (!post.imageMedium) post.imageMedium = existing;
             console.log(`    ✓ ${post.slug} (already has image)`);
             continue;
         }
 
-        const keyword = post.imageKeyword;
-        if (!keyword) {
-            console.log(`    - ${post.slug} (no imageKeyword, skipping)`);
-            continue;
+        if (PEXELS_API_KEY && post.imageKeyword) {
+            const img = await fetchPexelsImage(post.imageKeyword);
+            if (img) {
+                post.imageUrl = img.url;
+                post.imageMedium = img.medium;
+                post.photographer = img.photographer;
+                post.photographerUrl = img.photographerUrl;
+                post.pexelsUrl = img.pexelsUrl;
+                persistPostImage(post);
+                console.log(`    ✓ ${post.slug} → Pexels "${post.imageKeyword}" (by ${img.photographer})`);
+                await new Promise(r => setTimeout(r, 200));
+                continue;
+            }
         }
 
-        const img = await fetchPexelsImage(keyword);
-        if (img) {
-            post.imageUrl = img.url;
-            post.imageMedium = img.medium;
-            post.photographer = img.photographer;
-            post.photographerUrl = img.photographerUrl;
-            post.pexelsUrl = img.pexelsUrl;
-            console.log(`    ✓ ${post.slug} → "${keyword}" (by ${img.photographer})`);
+        const fallback = resolvePostImage(post);
+        post.imageUrl = fallback.imageUrl;
+        post.imageMedium = fallback.imageMedium;
+        if (persistPostImage(post)) {
+            console.log(`    ↳ ${post.slug} (fallback image, saved to source)`);
         } else {
-            console.log(`    ✗ ${post.slug} → "${keyword}" (no result)`);
+            console.log(`    ↳ ${post.slug} (fallback image)`);
         }
-
-        // Small delay to respect Pexels rate limits (200 req/hr)
-        await new Promise(r => setTimeout(r, 200));
     }
     console.log('');
 }
@@ -211,7 +212,8 @@ function readPosts() {
                     slug: meta.slug || file.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, ''),
                     bodyHtml,
                     imageKeyword: meta.imageKeyword || '',
-                    imageUrl: meta.featuredImageUrl || '',
+                    imageUrl: meta.imageUrl || meta.featuredImageUrl || '',
+                    product: meta.product || '',
                     sourceFile: file
                 });
 
@@ -227,7 +229,8 @@ function readPosts() {
                     slug: data.slug || file.replace(/^\d{4}-\d{2}-\d{2}[_-]/, '').replace(/\.json$/, ''),
                     bodyHtml: unescapeHtml(data.bodyHtml || ''),
                     imageKeyword: data.imageKeyword || '',
-                    imageUrl: data.featuredImageUrl || '',
+                    imageUrl: data.imageUrl || data.featuredImageUrl || '',
+                    product: data.product || '',
                     sourceFile: file
                 });
             }
@@ -316,7 +319,7 @@ function generatePostHtml(post) {
     <link rel="canonical" href="${postUrl}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/blog.css" />
     <script type="application/ld+json">${jsonLd}</script>
 </head>

@@ -127,37 +127,25 @@ function blogResourcesSection() {
             </section>`;
 }
 
-function featuredImageHtml(post) {
-    if (post.imageUrl) {
-        return `<img src="${escapeAttr(post.imageUrl)}" alt="${escapeAttr(post.title)}" loading="eager" />`;
+function cardImageHtml(post) {
+    const url = post.imageMedium || post.imageUrl;
+    if (url) {
+        return `<img src="${escapeAttr(url)}" alt="${escapeAttr(post.title)}" loading="lazy" />`;
     }
-    return `<div class="blog-featured-image-placeholder" aria-hidden="true">&#128221;</div>`;
+    return `<div class="blog-card-image-placeholder" aria-hidden="true"></div>`;
 }
 
-function renderFeaturedPost(post) {
-    if (!post) return '';
-    const postUrl = `/blog/${post.slug}.html`;
-    const excerpt = post.excerpt || post.title;
-    return `            <article id="blogFeatured" class="blog-featured">
-                <a href="${postUrl}" class="blog-featured-image">
-                    ${featuredImageHtml(post)}
-                </a>
-                <div class="blog-featured-body">
-                    <h2><a href="${postUrl}">${escapeHtml(post.title)}</a></h2>
-                    <p>${escapeHtml(excerpt)}</p>
-                    <a href="${postUrl}" class="blog-read-more">Read more</a>
-                </div>
-            </article>`;
-}
-
-function renderListItem(post) {
+function renderCard(post) {
     const postUrl = `/blog/${post.slug}.html`;
     const dateText = post.date ? formatDateShort(post.date) : '';
     const category = post.category || 'General';
     const searchText = `${post.title} ${post.excerpt || ''} ${category}`.toLowerCase();
-    return `                <article class="blog-list-item" data-category="${escapeAttr(category)}" data-search="${escapeAttr(searchText)}">
-                    <h2><a href="${postUrl}">${escapeHtml(post.title)}</a></h2>
-                    <p class="blog-list-date"><time datetime="${post.date || ''}">${dateText}</time></p>
+    return `                <article class="blog-card" data-category="${escapeAttr(category)}" data-search="${escapeAttr(searchText)}">
+                    <a href="${postUrl}" class="blog-card-image">${cardImageHtml(post)}</a>
+                    <div class="blog-card-body">
+                        <h2 class="blog-card-title"><a href="${postUrl}">${escapeHtml(post.title)}</a></h2>
+                        <p class="blog-card-date"><time datetime="${post.date || ''}">${dateText}</time></p>
+                    </div>
                 </article>`;
 }
 
@@ -171,17 +159,13 @@ function renderTopicPills(categories) {
 
 function generateBlogListingBlock(posts) {
     const sorted = [...posts].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-    const featured = sorted[0] || null;
-    const rest = sorted.slice(1);
     const categories = [...new Set(sorted.map(p => p.category).filter(Boolean))].sort();
 
-    const listHtml = rest.length
-        ? rest.map(renderListItem).join('\n')
-        : `                <p class="blog-empty">More articles coming soon.</p>`;
+    const gridHtml = sorted.length
+        ? sorted.map(renderCard).join('\n')
+        : `                <p class="blog-empty">No blog posts yet. Check back soon!</p>`;
 
     return `<!-- Blog Listing Start -->
-            ${featured ? renderFeaturedPost(featured) : ''}
-
             <div class="blog-toolbar">
                 <p class="blog-toolbar-label">Topics</p>
                 <div id="blogTopics" class="blog-topics" role="group" aria-label="Filter by topic">
@@ -189,12 +173,12 @@ function generateBlogListingBlock(posts) {
                 </div>
                 <div class="blog-search-wrap">
                     <label for="blogSearch">Search articles</label>
-                    <input id="blogSearch" class="blog-search" type="search" placeholder="Search by title or topic…" autocomplete="off" />
+                    <input id="blogSearch" class="blog-search" type="search" placeholder="Search articles" autocomplete="off" />
                 </div>
             </div>
 
-            <div id="blogPosts" class="blog-list">
-${listHtml}
+            <div id="blogPosts" class="blog-grid">
+${gridHtml}
             </div>
 
             <p id="blogEmpty" class="blog-empty hidden" role="status">No articles found matching your search.</p>
@@ -209,5 +193,5 @@ module.exports = {
     blogFooter,
     blogResourcesSection,
     generateBlogListingBlock,
-    featuredImageHtml,
+    cardImageHtml,
 };

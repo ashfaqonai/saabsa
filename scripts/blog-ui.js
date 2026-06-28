@@ -1,5 +1,5 @@
 /**
- * Client-side blog listing: search, topic filters, optional JSON refresh.
+ * Client-side blog listing: search, topic filters, Patientree-style card grid.
  */
 (function () {
     'use strict';
@@ -17,22 +17,28 @@
         return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    function renderListItem(post) {
+    function renderCard(post) {
         var url = '/blog/' + post.slug + '.html';
         var category = post.category || 'General';
         var searchText = (post.title + ' ' + (post.excerpt || '') + ' ' + category).toLowerCase();
+        var imgUrl = post.imageUrl || post.imageMedium || '';
+        var imgHtml = imgUrl
+            ? '<img src="' + escapeHtml(imgUrl) + '" alt="' + escapeHtml(post.title) + '" loading="lazy" />'
+            : '<div class="blog-card-image-placeholder" aria-hidden="true"></div>';
         return (
-            '<article class="blog-list-item" data-category="' + escapeHtml(category) + '" data-search="' + escapeHtml(searchText) + '">' +
-            '<h2><a href="' + url + '">' + escapeHtml(post.title) + '</a></h2>' +
-            '<p class="blog-list-date"><time datetime="' + (post.date || '') + '">' + formatDateShort(post.date) + '</time></p>' +
-            '</article>'
+            '<article class="blog-card" data-category="' + escapeHtml(category) + '" data-search="' + escapeHtml(searchText) + '">' +
+            '<a href="' + url + '" class="blog-card-image">' + imgHtml + '</a>' +
+            '<div class="blog-card-body">' +
+            '<h2 class="blog-card-title"><a href="' + url + '">' + escapeHtml(post.title) + '</a></h2>' +
+            '<p class="blog-card-date"><time datetime="' + (post.date || '') + '">' + formatDateShort(post.date) + '</time></p>' +
+            '</div></article>'
         );
     }
 
     function applyFilters() {
         var query = (document.getElementById('blogSearch') || {}).value || '';
         query = query.trim().toLowerCase();
-        var items = document.querySelectorAll('#blogPosts .blog-list-item');
+        var items = document.querySelectorAll('#blogPosts .blog-card');
         var visible = 0;
         items.forEach(function (item) {
             var cat = item.getAttribute('data-category') || '';
@@ -60,50 +66,38 @@
         });
     }
 
+    function renderToolbar(categories) {
+        var topicHtml = '<button type="button" class="blog-topic-btn active" data-topic="all">All</button>';
+        categories.forEach(function (cat) {
+            topicHtml += '<button type="button" class="blog-topic-btn" data-topic="' + escapeHtml(cat) + '">' + escapeHtml(cat) + '</button>';
+        });
+        return (
+            '<div class="blog-toolbar">' +
+            '<p class="blog-toolbar-label">Topics</p>' +
+            '<div id="blogTopics" class="blog-topics" role="group" aria-label="Filter by topic">' + topicHtml + '</div>' +
+            '<div class="blog-search-wrap">' +
+            '<label for="blogSearch">Search articles</label>' +
+            '<input id="blogSearch" class="blog-search" type="search" placeholder="Search articles" autocomplete="off" />' +
+            '</div></div>'
+        );
+    }
+
     function renderFromPosts(posts) {
         if (!posts.length) return;
         posts.sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
 
-        var featured = posts[0];
-        var rest = posts.slice(1);
         var categories = [];
         posts.forEach(function (p) {
             if (p.category && categories.indexOf(p.category) === -1) categories.push(p.category);
         });
         categories.sort();
 
-        var topicHtml = '<button type="button" class="blog-topic-btn active" data-topic="all">All</button>';
-        categories.forEach(function (cat) {
-            topicHtml += '<button type="button" class="blog-topic-btn" data-topic="' + escapeHtml(cat) + '">' + escapeHtml(cat) + '</button>';
-        });
-
-        var featuredUrl = '/blog/' + featured.slug + '.html';
-        var featuredImg = featured.imageUrl
-            ? '<img src="' + escapeHtml(featured.imageUrl) + '" alt="' + escapeHtml(featured.title) + '" loading="eager" />'
-            : '<div class="blog-featured-image-placeholder" aria-hidden="true">&#128221;</div>';
-
-        var listHtml = rest.length
-            ? rest.map(renderListItem).join('')
-            : '<p class="blog-empty">More articles coming soon.</p>';
-
+        var gridHtml = posts.map(renderCard).join('');
         var listing = document.getElementById('blogListing');
         if (listing) {
             listing.innerHTML =
-                '<article id="blogFeatured" class="blog-featured">' +
-                '<a href="' + featuredUrl + '" class="blog-featured-image">' + featuredImg + '</a>' +
-                '<div class="blog-featured-body">' +
-                '<h2><a href="' + featuredUrl + '">' + escapeHtml(featured.title) + '</a></h2>' +
-                '<p>' + escapeHtml(featured.excerpt || featured.title) + '</p>' +
-                '<a href="' + featuredUrl + '" class="blog-read-more">Read more</a>' +
-                '</div></article>' +
-                '<div class="blog-toolbar">' +
-                '<p class="blog-toolbar-label">Topics</p>' +
-                '<div id="blogTopics" class="blog-topics" role="group" aria-label="Filter by topic">' + topicHtml + '</div>' +
-                '<div class="blog-search-wrap">' +
-                '<label for="blogSearch">Search articles</label>' +
-                '<input id="blogSearch" class="blog-search" type="search" placeholder="Search by title or topic…" autocomplete="off" />' +
-                '</div></div>' +
-                '<div id="blogPosts" class="blog-list">' + listHtml + '</div>' +
+                renderToolbar(categories) +
+                '<div id="blogPosts" class="blog-grid">' + gridHtml + '</div>' +
                 '<p id="blogEmpty" class="blog-empty hidden" role="status">No articles found matching your search.</p>';
         }
 
@@ -156,7 +150,7 @@
     }
 
     function loadBlogPosts() {
-        var hasStaticList = document.querySelector('#blogPosts .blog-list-item');
+        var hasStaticGrid = document.querySelector('#blogPosts .blog-card');
 
         fetch('/_posts/posts.json')
             .then(function (res) {
@@ -167,7 +161,7 @@
                 var posts = data.posts || [];
                 if (!posts.length) return;
 
-                if (hasStaticList) {
+                if (hasStaticGrid) {
                     initStaticFilters();
                 } else {
                     renderFromPosts(posts);
@@ -175,7 +169,7 @@
                 injectBlogListJsonLd(posts);
             })
             .catch(function () {
-                if (hasStaticList) {
+                if (hasStaticGrid) {
                     initStaticFilters();
                 }
             });
