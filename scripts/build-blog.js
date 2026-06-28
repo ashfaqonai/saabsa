@@ -16,6 +16,12 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const { marked } = require('marked');
+const {
+    blogHeader,
+    blogFooter,
+    generateBlogListingBlock,
+    formatDateShort,
+} = require('./blog-layout');
 
 const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, '_posts');
@@ -243,7 +249,7 @@ function generatePostHtml(post) {
     const postUrl = `${SITE_URL}/blog/${post.slug}.html`;
     const postImage = post.imageUrl || `${SITE_URL}/og-image.png`;
     const postExcerpt = post.excerpt || post.title;
-    const formattedDate = formatDate(post.date);
+    const formattedDate = formatDateShort(post.date);
 
     const jsonLd = JSON.stringify({
         "@context": "https://schema.org",
@@ -266,10 +272,19 @@ function generatePostHtml(post) {
         "inLanguage": "en-US"
     });
 
+    const heroBlock = post.imageUrl ? `
+            <div class="blog-post-hero">
+                <img src="${escapeAttr(post.imageUrl)}" alt="${escapeAttr(post.title)}" loading="eager" />
+                ${post.photographer ? `
+                <div class="blog-post-credit">
+                    Photo by <a href="${escapeAttr(post.photographerUrl || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(post.photographer)}</a>
+                    on <a href="${escapeAttr(post.pexelsUrl || 'https://www.pexels.com')}" target="_blank" rel="noopener noreferrer">Pexels</a>
+                </div>` : ''}
+            </div>` : '';
+
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PXBREVK1K"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -277,249 +292,54 @@ function generatePostHtml(post) {
         gtag('js', new Date());
         gtag('config', 'G-1PXBREVK1K');
     </script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="192x192" href="/patientreeLogo.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/patientreeLogo.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/patientreeLogo.png" />
     <link rel="shortcut icon" href="/favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/patientreeLogo.png" />
     <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- SEO -->
     <title>${escapeHtml(post.title)} | Saabsa Solutions Blog</title>
     <meta name="description" content="${escapeAttr(postExcerpt)}" />
     <meta name="author" content="Saabsa Solutions" />
     <meta name="robots" content="index, follow" />
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article" />
     <meta property="og:url" content="${postUrl}" />
     <meta property="og:title" content="${escapeAttr(post.title)}" />
     <meta property="og:description" content="${escapeAttr(postExcerpt)}" />
     <meta property="og:image" content="${postImage}" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="${escapeAttr(post.title)}" />
     <meta property="og:site_name" content="Saabsa Solutions" />
-    <meta property="og:locale" content="en_US" />
-
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="${postUrl}" />
     <meta name="twitter:title" content="${escapeAttr(post.title)}" />
     <meta name="twitter:description" content="${escapeAttr(postExcerpt)}" />
     <meta name="twitter:image" content="${postImage}" />
-    <meta name="twitter:image:alt" content="${escapeAttr(post.title)}" />
-
     <link rel="canonical" href="${postUrl}" />
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- JSON-LD Structured Data -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/blog.css" />
     <script type="application/ld+json">${jsonLd}</script>
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-attachment: fixed;
-            color: #1a202c;
-            overflow-x: hidden;
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .section-padding { padding: 80px 20px; }
-
-        .blog-content { line-height: 1.8; }
-        .blog-content h1 { font-size: 2.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c; }
-        .blog-content h2 { font-size: 1.875rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c; }
-        .blog-content h3 { font-size: 1.5rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #1a202c; }
-        .blog-content p  { margin-bottom: 1rem; color: #4a5568; font-size: 1.125rem; }
-        .blog-content ul, .blog-content ol { margin-left: 1.5rem; margin-bottom: 1rem; }
-        .blog-content li { margin-bottom: 0.5rem; color: #4a5568; font-size: 1.125rem; }
-        .blog-content a  { color: #667eea; text-decoration: underline; }
-        .blog-content code { background: #f7fafc; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: 'Courier New', monospace; font-size: 0.875rem; }
-        .blog-content pre  { background: #f7fafc; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1rem; }
-        .blog-content blockquote { border-left: 4px solid #667eea; padding-left: 1rem; margin: 1rem 0; color: #4a5568; font-style: italic; }
-
-        .hero-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); }
-    </style>
 </head>
-<body class="antialiased">
+<body class="blog-page">
 
-    <!-- Header -->
-    <header class="glass-effect sticky top-0 z-50 shadow-lg">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex flex-col sm:flex-row justify-between items-center">
-                <a href="/index.html" class="mb-4 sm:mb-0 group transition-transform hover:scale-105">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" role="img" aria-labelledby="logo-title logo-desc" class="h-16 sm:h-20 md:h-24 w-auto min-w-[200px] sm:min-w-[250px] md:min-w-[300px]">
-                        <title id="logo-title">Saabsa Solutions logo</title>
-                        <desc id="logo-desc">Hex-tech icon with "SAABSA SOLUTIONS" wordmark</desc>
-                        <g transform="translate(20,20)">
-                            <defs>
-                                <linearGradient id="split2" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="50%" stop-color="#0F3D6E"/>
-                                    <stop offset="50%" stop-color="#F26A21"/>
-                                </linearGradient>
-                                <clipPath id="hexClip2">
-                                    <path d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
-                                </clipPath>
-                            </defs>
-                            <path fill="url(#split2)" d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
-                            <g clip-path="url(#hexClip2)" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
-                                <line x1="30" y1="40" x2="90" y2="40"/>
-                                <circle cx="30" cy="40" r="4" fill="#FFFFFF"/>
-                                <circle cx="90" cy="40" r="4" fill="#FFFFFF"/>
-                                <line x1="30" y1="60" x2="90" y2="60"/>
-                                <circle cx="30" cy="60" r="4" fill="#FFFFFF"/>
-                                <circle cx="90" cy="60" r="4" fill="#FFFFFF"/>
-                                <line x1="30" y1="80" x2="90" y2="80"/>
-                                <circle cx="30" cy="80" r="4" fill="#FFFFFF"/>
-                                <circle cx="90" cy="80" r="4" fill="#FFFFFF"/>
-                            </g>
-                        </g>
-                        <g transform="translate(170,40)">
-                            <text x="0" y="45" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="48" font-weight="700" fill="#0F3D6E" letter-spacing="1">SAABSA</text>
-                            <text x="0" y="90" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="28" font-weight="600" fill="#0F3D6E" opacity="0.85" letter-spacing="2">SOLUTIONS</text>
-                        </g>
-                    </svg>
-                </a>
-                <nav class="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm sm:text-base">
-                    <a href="/index.html#about" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">About</a>
-                    <a href="/services.html" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Services</a>
-                    <a href="/blog.html" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Blog</a>
-                    <a href="/index.html#products" class="font-medium text-gray-700 hover:text-[#0F3D6E] transition-colors">Products</a>
-                    <a href="/index.html#contact" class="bg-gradient-to-r from-[#0F3D6E] to-[#F26A21] text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
-                        Get Started
-                    </a>
-                </nav>
-            </div>
-        </div>
-    </header>
+${blogHeader('blog')}
 
-    <!-- Blog Post Content -->
-    <section class="section-padding bg-white">
-        <div class="container mx-auto max-w-4xl">
-            <div class="mb-6">
-                <a href="/blog.html" class="text-[#0F3D6E] font-semibold hover:underline inline-flex items-center gap-2">
-                    &larr; Back to Blog
-                </a>
-            </div>
-            ${post.imageUrl ? `
-            <div class="mb-8 rounded-3xl overflow-hidden shadow-xl">
-                <img src="${escapeAttr(post.imageUrl)}" alt="${escapeAttr(post.title)}" class="w-full h-64 md:h-96 object-cover" loading="eager" />
-                ${post.photographer ? `
-                <div class="bg-gray-900 bg-opacity-80 px-4 py-2 text-xs text-gray-300">
-                    Photo by <a href="${escapeAttr(post.photographerUrl || '#')}" target="_blank" rel="noopener noreferrer" class="text-white hover:underline">${escapeHtml(post.photographer)}</a>
-                    on <a href="${escapeAttr(post.pexelsUrl || 'https://www.pexels.com')}" target="_blank" rel="noopener noreferrer" class="text-white hover:underline">Pexels</a>
-                </div>` : ''}
-            </div>` : ''}
-            <div class="glass-effect p-8 md:p-12 rounded-3xl shadow-xl">
-                <article>
-                    <div class="flex items-center gap-4 mb-6 text-sm text-gray-500">
-                        ${post.date ? `<time datetime="${post.date}">${formattedDate}</time>` : ''}
-                        ${post.category ? `<span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">${escapeHtml(post.category)}</span>` : ''}
-                    </div>
-                    <h1 class="text-4xl md:text-5xl font-black mb-8 text-gray-900">${escapeHtml(post.title)}</h1>
-                    <div class="blog-content">
-                        ${post.bodyHtml}
-                    </div>
-                </article>
-            </div>
+    <main class="blog-post-main">
+        <a href="/blog.html" class="blog-back">&larr; Back to Blog</a>
+        ${heroBlock}
+        <div class="blog-post-meta">
+            ${post.date ? `<time datetime="${post.date}">${formattedDate}</time>` : ''}
+            ${post.category ? `<span class="blog-post-category">${escapeHtml(post.category)}</span>` : ''}
         </div>
-    </section>
+        <h1 class="blog-post-title">${escapeHtml(post.title)}</h1>
+        <article class="blog-post-article">
+            <div class="blog-content">
+                ${post.bodyHtml}
+            </div>
+        </article>
+    </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-12">
-        <div class="container mx-auto max-w-7xl px-4">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" class="w-10 h-10">
-                            <defs>
-                                <linearGradient id="split" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="50%" stop-color="#0F3D6E"/>
-                                    <stop offset="50%" stop-color="#F26A21"/>
-                                </linearGradient>
-                                <clipPath id="hexClip">
-                                    <path d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
-                                </clipPath>
-                            </defs>
-                            <path fill="url(#split)" d="M60 6 L101 30 L101 90 L60 114 L19 90 L19 30 Z"/>
-                            <g clip-path="url(#hexClip)" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
-                                <line x1="30" y1="40" x2="90" y2="40"/>
-                                <circle cx="30" cy="40" r="4" fill="#FFFFFF"/>
-                                <circle cx="90" cy="40" r="4" fill="#FFFFFF"/>
-                                <line x1="30" y1="60" x2="90" y2="60"/>
-                                <circle cx="30" cy="60" r="4" fill="#FFFFFF"/>
-                                <circle cx="90" cy="60" r="4" fill="#FFFFFF"/>
-                                <line x1="30" y1="80" x2="90" y2="80"/>
-                                <circle cx="30" cy="80" r="4" fill="#FFFFFF"/>
-                                <circle cx="90" cy="80" r="4" fill="#FFFFFF"/>
-                            </g>
-                        </svg>
-                        <span class="text-xl font-bold text-white">Saabsa Solutions</span>
-                    </div>
-                    <p class="text-sm font-semibold text-white mb-2">Transforming Ideas into Intelligent Solutions</p>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        <strong>Saabsa Solutions</strong> builds AI-powered products and custom software for organizations worldwide.
-                    </p>
-                </div>
-                <div>
-                    <h3 class="text-white font-bold mb-4">Services</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="/services.html" class="hover:text-white transition-colors">Custom Development</a></li>
-                        <li><a href="/services.html" class="hover:text-white transition-colors">AI Solutions</a></li>
-                        <li><a href="/services.html" class="hover:text-white transition-colors">Cloud Services</a></li>
-                        <li><a href="/services.html" class="hover:text-white transition-colors">Consulting</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-white font-bold mb-4">Products</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="/blog.html" class="hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="/index.html#patientree" class="hover:text-white transition-colors">Patientree AI</a></li>
-                        <li><a href="https://www.patientree.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Visit Patientree</a></li>
-                        <li><a href="https://www.dataxpipe.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">DataXPipe</a></li>
-                        <li><a href="https://leasexit.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Lease Exit</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-white font-bold mb-4">Connect</h3>
-                    <div class="flex space-x-4">
-                        <a href="https://www.linkedin.com/company/saabsa-solutions" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-[#0F3D6E] transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                        </a>
-                        <a href="https://x.com/SaabsaSolutions" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-purple-600 transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; ${new Date().getFullYear()} Saabsa Solutions. All rights reserved. | <a href="#" class="hover:text-white transition-colors">Privacy Policy</a> | <a href="#" class="hover:text-white transition-colors">Terms of Service</a></p>
-            </div>
-        </div>
-    </footer>
+${blogFooter()}
 
 </body>
 </html>`;
@@ -554,49 +374,6 @@ function generatePostsJson(posts) {
 // Update blog.html with static, crawlable links
 // ---------------------------------------------------------------------------
 
-function generateBlogListingSection(posts) {
-    const cards = posts.map(post => {
-        const postUrl = `/blog/${post.slug}.html`;
-        const dateText = post.date ? formatDate(post.date) : 'Unknown date';
-        const dateAttr = post.date || '';
-        const excerpt = post.excerpt || post.title;
-
-        return `                <article class="card-hover glass-effect rounded-3xl shadow-xl overflow-hidden">
-                    ${post.imageUrl ? `
-                    <a href="${postUrl}" class="block">
-                        <img src="${escapeAttr(post.imageUrl)}" alt="${escapeAttr(post.title)}" class="w-full h-48 md:h-56 object-cover" loading="lazy" />
-                    </a>` : ''}
-                    <div class="p-8">
-                        <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
-                            <time datetime="${dateAttr}">${dateText}</time>
-                            ${post.category ? `<span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">${escapeHtml(post.category)}</span>` : ''}
-                        </div>
-                        <h2 class="text-3xl font-bold mb-4 text-gray-900">
-                            <a href="${postUrl}" class="hover:text-[#0F3D6E] transition-colors">
-                                ${escapeHtml(post.title)}
-                            </a>
-                        </h2>
-                        <p class="text-lg text-gray-600 mb-4">${escapeHtml(excerpt)}</p>
-                        <a href="${postUrl}" class="inline-block text-[#0F3D6E] font-semibold hover:underline">
-                            Read More →
-                        </a>
-                    </div>
-                </article>`;
-    }).join('\n\n');
-
-    return `    <!-- Blog Posts Section -->
-    <section class="section-padding bg-white">
-        <div class="container mx-auto max-w-4xl">
-            <div id="blogPosts" class="space-y-8">
-${cards || `                <div class="text-center py-12">
-                    <p class="text-gray-600 text-lg mb-4">No blog posts yet. Check back soon!</p>
-                    <p class="text-gray-500 text-sm">New insights on technology, AI, and data engineering coming weekly.</p>
-                </div>`}
-            </div>
-        </div>
-    </section>`;
-}
-
 function updateBlogIndexPage(posts) {
     if (!fs.existsSync(BLOG_INDEX_PATH)) {
         console.warn('  ! blog.html not found; skipping static listing update');
@@ -604,15 +381,15 @@ function updateBlogIndexPage(posts) {
     }
 
     const html = fs.readFileSync(BLOG_INDEX_PATH, 'utf8');
-    const replacementSection = generateBlogListingSection(posts);
-    const pattern = /<!-- Blog Posts Section -->[\s\S]*?<\/section>/;
+    const replacementBlock = generateBlogListingBlock(posts);
+    const pattern = /<!-- Blog Listing Start -->[\s\S]*?<!-- Blog Listing End -->/;
 
     if (!pattern.test(html)) {
-        console.warn('  ! Could not find blog posts section in blog.html; skipping update');
+        console.warn('  ! Could not find blog listing block in blog.html; skipping update');
         return;
     }
 
-    const updated = html.replace(pattern, replacementSection);
+    const updated = html.replace(pattern, replacementBlock);
     fs.writeFileSync(BLOG_INDEX_PATH, updated, 'utf8');
 }
 

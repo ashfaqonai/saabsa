@@ -3,7 +3,9 @@
   "private": true,
   "description": "Build script for Saabsa Solutions blog - generates static HTML pages from _posts/",
   "scripts": {
-    "build": "node build-blog.js"
+    "build": "node build-blog.js",
+    "publish:pending": "node publish-pending.js",
+    "generate:pending": "node generate-pending-posts.js"
   },
   "dependencies": {
     "marked": "^15.0.0"

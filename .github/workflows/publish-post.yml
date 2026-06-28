@@ -26,35 +26,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
-          PENDING_DIR="_posts/pending"
-          POSTS_DIR="_posts"
-
-          # Find the oldest pending JSON file (alphabetical = oldest)
-          NEXT=$(ls -1 "$PENDING_DIR"/*.json 2>/dev/null | sort | head -n1 || true)
-
-          if [ -z "$NEXT" ]; then
-            echo "No pending posts found. Nothing to publish."
+          OUTPUT=$(node scripts/publish-pending.js)
+          echo "$OUTPUT"
+          if echo "$OUTPUT" | grep -q '^slug='; then
+            SLUG=$(echo "$OUTPUT" | grep '^slug=' | cut -d= -f2)
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "slug=${SLUG}" >> "$GITHUB_OUTPUT"
+            echo "Remaining pending: $(ls -1 _posts/pending/*.json 2>/dev/null | wc -l)"
+          else
             echo "published=false" >> "$GITHUB_OUTPUT"
-            exit 0
           fi
-
-          BASENAME=$(basename "$NEXT")
-          DATE=$(date -u +%Y-%m-%d)
-          SLUG="${BASENAME%.json}"
-          DEST="${POSTS_DIR}/${DATE}_${SLUG}.json"
-
-          echo "Publishing: $BASENAME"
-          echo "  From: $NEXT"
-          echo "  To:   $DEST"
-          echo "  Date: $DATE"
-
-          # Move from pending to _posts with date prefix
-          mv "$NEXT" "$DEST"
-
-          echo "published=true" >> "$GITHUB_OUTPUT"
-          echo "slug=${SLUG}" >> "$GITHUB_OUTPUT"
-          echo "Remaining pending posts: $(ls -1 "$PENDING_DIR"/*.json 2>/dev/null | wc -l)"
 
       - name: Commit and push
         if: steps.pub.outputs.published == 'true'

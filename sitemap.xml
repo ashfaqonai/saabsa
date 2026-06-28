@@ -2,23 +2,191 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.saabsa.com/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-06-28</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.saabsa.com/services.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-06-28</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://www.saabsa.com/blog.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-06-28</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
   <!-- Individual Blog Posts -->
+  <url>
+    <loc>https://www.saabsa.com/blog/why-scalable-architecture-matters-in-healthcare-software.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/why-healthcare-startups-need-rapid-prototyping-in-2026.html</loc>
+    <lastmod>2026-04-08</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/why-every-healthcare-business-needs-a-data-strategy-in-2026.html</loc>
+    <lastmod>2026-04-07</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/why-every-clinic-should-automate-patient-intake-workflows.html</loc>
+    <lastmod>2026-04-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/why-every-clinic-needs-a-custom-patient-portal.html</loc>
+    <lastmod>2026-04-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/why-data-quality-is-critical-for-ai-models-in-healthcare.html</loc>
+    <lastmod>2026-04-04</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/why-custom-healthcare-software-outperforms-off-the-shelf-tools.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/what-is-healthcare-rpa--a-complete-beginner-s-guide.html</loc>
+    <lastmod>2026-04-02</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/using-machine-learning-to-predict-patient-no-shows.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/top-tech-stacks-for-healthcare-applications-in-2026.html</loc>
+    <lastmod>2026-03-31</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/top-20-healthcare-workflows-you-can-automate-today.html</loc>
+    <lastmod>2026-03-30</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/top-10-ai-use-cases-every-clinic-should-adopt-this-year.html</loc>
+    <lastmod>2026-03-29</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/the-role-of-data-governance-in-healthcare.html</loc>
+    <lastmod>2026-03-28</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/the-future-of-ai-in-population-health-management.html</loc>
+    <lastmod>2026-03-27</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/the-business-roi-of-workflow-automation-in-healthcare.html</loc>
+    <lastmod>2026-03-26</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/sql-vs-nosql-for-healthcare-systems-what-to-choose.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/rpa-vs--ai--what-s-the-difference-and-when-to-use-each.html</loc>
+    <lastmod>2026-03-24</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/rpa-in-medical-billing--reduce-errors---speed-up-payments.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/reducing-technical-debt-in-healthcare-software-projects.html</loc>
+    <lastmod>2026-03-22</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/modernizing-legacy-healthcare-systems-with-microservices.html</loc>
+    <lastmod>2026-03-21</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/mobile-app-development-for-healthcare--top-trends.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/integrating-ehr-data-into-ai-systems-the-right-way.html</loc>
+    <lastmod>2026-03-19</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/insurance-verification-automation-why-clinics-need-it-now.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/how-to-integrate-ai-models-into-your-healthcare-app.html</loc>
+    <lastmod>2026-03-17</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/how-to-choose-the-right-development-partner-for-healthcare-projects.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/how-structured-data-improves-ai-accuracy-in-healthcare.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/how-rpa-saves-hospitals-hundreds-of-hours-every-month.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.saabsa.com/blog/how-rpa-improves-data-accuracy-across-ehr-systems.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
   <url>
     <loc>https://www.saabsa.com/blog/how-predictive-analytics-helps-reduce-hospital-readmissions.html</loc>
     <lastmod>2026-03-12</lastmod>
